@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors — placeholder tokens, will be updated from Figma */
-  --color-primary: #1a1a1a;
-  --color-secondary: #f5f5f5;
-  --color-accent: #646cff;
+  /* Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-accent: #05ff43;
+  --color-gray: #aaaaaa;
 
-  /* Fonts — will be updated when Iva picks her fonts */
-  --font-display: "system-ui", sans-serif;
-  --font-body: "system-ui", sans-serif;
+  /* Fonts */
+  --font-display: "Clash Display", sans-serif;
+  --font-body: "Clash Display", sans-serif;
 }
 
 /* Base styles */
@@ -18,9 +19,10 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
+  font-family: var(--font-display);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  cursor: none;
 }
 
 /* Lenis smooth scroll */
