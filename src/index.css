@@ -22,7 +22,7 @@ body {
   font-family: var(--font-display);
   background-color: var(--color-white);
   color: var(--color-black);
-  cursor: none;
+  /* cursor: none; — re-enable when custom cursor is built */
 }
 
 /* Lenis smooth scroll */
@@ -41,4 +41,47 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Inverse rounded corners (scallop) for folder tabs */
+.tab-scallop {
+  position: relative;
+}
+
+.tab-scallop::before,
+.tab-scallop::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  background: transparent;
+}
+
+.tab-scallop::before {
+  left: -12px;
+  bottom: -3px;
+  border-bottom-right-radius: 12px;
+}
+
+.tab-scallop::after {
+  right: -12px;
+  bottom: -3px;
+  border-bottom-left-radius: 12px;
+}
+
+.tab-scallop-black::before {
+  box-shadow: 7px 0 0 0 #000000;
+}
+
+.tab-scallop-black::after {
+  box-shadow: -7px 0 0 0 #000000;
+}
+
+.tab-scallop-accent::before {
+  box-shadow: 7px 0 0 0 #05ff43;
+}
+
+.tab-scallop-accent::after {
+  box-shadow: -7px 0 0 0 #05ff43;
 }
