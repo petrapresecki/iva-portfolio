@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { initLenis, destroyLenis } from '@/lib/lenis'
 import Header from '@/components/layout/Header'
-import Hero from '@/components/sections/Hero'
+import Portfolio from '@/components/sections/Portfolio'
 
 type Tab = 'portfolio' | 'about'
 
@@ -29,7 +29,7 @@ function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Hero />
+              <Portfolio />
             </motion.main>
           ) : (
             <motion.main

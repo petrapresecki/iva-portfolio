@@ -17,7 +17,7 @@ function Header({ activeTab, onTabChange }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 pt-4 md:pt-8 bg-white">
-      <div className="relative h-[60px] md:h-[80px]">
+      <div className="relative h-[95px] md:h-[115px]">
         {/* Portfolio folder layer — tab + black bar (renders first = below in DOM) */}
         <motion.div
           className={`absolute inset-x-0 pointer-events-none ${!isPortfolio ? '[filter:drop-shadow(0_-3px_6px_rgba(0,0,0,0.5))] [clip-path:inset(-20px_-20px_-10px_-20px)]' : ''}`}
