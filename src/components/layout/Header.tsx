@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 type Tab = 'portfolio' | 'about'
@@ -10,13 +10,44 @@ interface HeaderProps {
 
 const TAB_OFFSET = 20 // px the back folder peeks below the front
 const PEEK_AMOUNT = -6 // px the tab lifts on hover
+const SCROLL_THRESHOLD = 50 // px scrolled before hide kicks in
+const SCROLL_DELTA = 8 // minimum scroll distance to trigger
 
 function Header({ activeTab, onTabChange }: HeaderProps) {
   const isPortfolio = activeTab === 'portfolio'
   const [hoveredTab, setHoveredTab] = useState<Tab | null>(null)
+  const [isHidden, setIsHidden] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      const delta = currentScrollY - lastScrollY.current
+
+      setIsScrolled(currentScrollY > 10)
+
+      if (currentScrollY < SCROLL_THRESHOLD) {
+        setIsHidden(false)
+      } else if (delta > SCROLL_DELTA) {
+        setIsHidden(true)
+      } else if (delta < -SCROLL_DELTA) {
+        setIsHidden(false)
+      }
+
+      lastScrollY.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 pt-4 md:pt-8 bg-white">
+    <motion.header
+      className={`sticky top-0 z-50 pt-4 md:pt-8 bg-white transition-shadow duration-300 ${isScrolled && !isHidden ? 'shadow-[0_4px_20px_rgba(0,0,0,0.08)]' : ''}`}
+      animate={{ y: isHidden ? '-100%' : '0%' }}
+      transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
+    >
       <div className="relative h-[95px] md:h-[115px]">
         {/* Portfolio folder layer — tab + black bar (renders first = below in DOM) */}
         <motion.div
@@ -76,7 +107,7 @@ function Header({ activeTab, onTabChange }: HeaderProps) {
           <div className="h-5 bg-accent shadow-[0_18px_0_0_#05ff43]" />
         </motion.div>
       </div>
-    </header>
+    </motion.header>
   )
 }
 
