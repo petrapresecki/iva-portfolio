@@ -22,7 +22,7 @@ body {
   font-family: var(--font-display);
   background-color: var(--color-white);
   color: var(--color-black);
-  /* cursor: none; — re-enable when custom cursor is built */
+  cursor: none;
 }
 
 /* Lenis smooth scroll */

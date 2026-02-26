@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { initLenis, destroyLenis } from '@/lib/lenis'
 import Header from '@/components/layout/Header'
 import Portfolio from '@/components/sections/Portfolio'
+import CustomCursor from '@/components/ui/CustomCursor'
 
 type Tab = 'portfolio' | 'about'
 
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <div className={`min-h-screen ${activeTab === 'portfolio' ? 'bg-black' : 'bg-accent'}`}>
         <AnimatePresence mode="wait">
