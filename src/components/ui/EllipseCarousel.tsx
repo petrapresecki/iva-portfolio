@@ -16,9 +16,28 @@ const OFFSET = 0 // normal offset (push items outward from path)
 const MIN_SCALE = 30 // % at max distance from scale controller
 const MAX_SCALE = 110 // % at scale controller position
 
+// Per-image size multipliers — varied sizes for visual rhythm
+const SIZE_MULTIPLIERS = [
+  0.65, 1.1, 0.8, 1.25, 0.7, 1.0,
+  0.75, 1.2, 0.6, 1.15, 0.85, 1.05,
+]
+
+// Lerp helper
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+// Pre-computed explosion vectors per image (deterministic, not random)
+// Each image bursts outward in a unique direction with varied distance
+const EXPLOSION_SEEDS = Array.from({ length: IMAGE_COUNT }, (_, i) => {
+  const angle = (i / IMAGE_COUNT) * Math.PI * 2 + (i % 3) * 0.4 // offset for organic feel
+  const distance = 1.2 + (i % 4) * 0.3 // varied burst distances (1.2–2.1x viewport)
+  const spinDir = i % 2 === 0 ? 1 : -1 // alternate spin directions
+  return { angle, distance, spin: spinDir * (120 + (i % 5) * 60) }
+})
+
 function EllipseCarousel() {
   const containerRef = useRef<HTMLDivElement>(null)
   const rotationRef = useRef({ value: 0 })
+  const explodeProgress = useRef({ value: 0 })
   const itemsRef = useRef<(HTMLDivElement | null)[]>([])
 
   const updatePositions = useCallback(() => {
@@ -26,10 +45,12 @@ function EllipseCarousel() {
     if (!container) return
 
     const rect = container.getBoundingClientRect()
+    const ep = explodeProgress.current.value // 0 = ellipse, 1 = fully exploded
+
     const cx = rect.width / 2
     const cy = rect.height * 0.46
 
-    // Ellipse radii
+    // Ellipse radii (constant — no breathing)
     const rx = rect.width * 0.24
     const ry = rect.height * 0.24
 
@@ -38,11 +59,10 @@ function EllipseCarousel() {
     const cosTilt = Math.cos(tiltRad)
     const sinTilt = Math.sin(tiltRad)
 
-    // Image dimensions
+    // Base image dimensions (each image scales individually via SIZE_MULTIPLIERS)
     const baseW = Math.min(rect.width * 0.24, 280)
-    const baseH = baseW * 0.7
 
-    // Scale controller position — where items are largest (front of ellipse)
+    // Scale controller position
     const scX = cx
     const scY = cy + ry * cosTilt + rx * Math.abs(sinTilt)
     const maxDist = 2 * Math.max(rx, ry)
@@ -52,7 +72,6 @@ function EllipseCarousel() {
     itemsRef.current.forEach((el, i) => {
       if (!el) return
 
-      // AE: t = (x / lc + (r / 360)) % 1
       const t = ((i / IMAGE_COUNT) + (r / 360)) % 1
       const theta = t * Math.PI * 2
 
@@ -60,7 +79,7 @@ function EllipseCarousel() {
       const ex = rx * Math.cos(theta)
       const ey = ry * Math.sin(theta)
 
-      // Tangent on un-tilted ellipse (derivative)
+      // Tangent on un-tilted ellipse
       const dtx = -rx * Math.sin(theta)
       const dty = ry * Math.cos(theta)
 
@@ -72,39 +91,81 @@ function EllipseCarousel() {
       const tanX = dtx * cosTilt - dty * sinTilt
       const tanY = dtx * sinTilt + dty * cosTilt
 
-      // Normal (perpendicular to tangent) — AE: nor = [-tan[1], tan[0]]
+      // Normal
       const norX = -tanY
       const norY = tanX
       const norLen = Math.sqrt(norX * norX + norY * norY) || 1
 
-      // Final position with offset along normal
-      const finalX = px + (norX / norLen) * OFFSET
-      const finalY = py + (norY / norLen) * OFFSET
+      // Ellipse position
+      const ellipseX = px + (norX / norLen) * OFFSET
+      const ellipseY = py + (norY / norLen) * OFFSET
+      const ellipseRot = Math.atan2(tanY, tanX) * (180 / Math.PI)
 
-      // Rotation from tangent — AE: radiansToDegrees(atan2(tan[1], tan[0]))
-      const rotation = Math.atan2(tanY, tanX) * (180 / Math.PI)
-
-      // Scale based on distance from scale controller
-      // AE: linear(distance, 0, maxDist, maxS/100, minS/100)
-      const dx = finalX - scX
-      const dy = finalY - scY
+      // Scale on ellipse
+      const dx = ellipseX - scX
+      const dy = ellipseY - scY
       const dist = Math.min(Math.sqrt(dx * dx + dy * dy), maxDist)
-      const scale = MAX_SCALE / 100 + (dist / maxDist) * ((MIN_SCALE - MAX_SCALE) / 100)
+      const ellipseScale = MAX_SCALE / 100 + (dist / maxDist) * ((MIN_SCALE - MAX_SCALE) / 100)
 
-      // Z-index: larger scale = in front
+      // Explosion target — burst outward from center
+      const seed = EXPLOSION_SEEDS[i]
+      const burstRadius = Math.max(rect.width, rect.height) * seed.distance
+      const explodeX = cx + Math.cos(seed.angle) * burstRadius
+      const explodeY = cy + Math.sin(seed.angle) * burstRadius
+      const explodeRot = ellipseRot + seed.spin
+      const explodeScale = lerp(ellipseScale, 0.15, 0.8) // shrink as they fly away
+
+      // Ease the explosion with a power curve for dramatic feel
+      const easedP = ep * ep // accelerating — slow start, fast finish
+
+      // Lerp between ellipse and explosion
+      const finalX = lerp(ellipseX, explodeX, easedP)
+      const finalY = lerp(ellipseY, explodeY, easedP)
+      const rotation = lerp(ellipseRot, explodeRot, easedP)
+      const scale = lerp(ellipseScale, explodeScale, easedP)
+      const opacity = ep > 0.7 ? lerp(1, 0, (ep - 0.7) / 0.3) : 1
+
       const zIndex = Math.round(scale * 100)
 
+      // Per-image size
+      const imgW = baseW * SIZE_MULTIPLIERS[i]
+      const imgH = imgW * 0.7
+
       gsap.set(el, {
-        x: finalX - baseW / 2,
-        y: finalY - baseH / 2,
+        x: finalX - imgW / 2,
+        y: finalY - imgH / 2,
         rotation,
         scale,
         zIndex,
-        width: baseW,
-        height: baseH,
+        opacity,
+        width: imgW,
+        height: imgH,
       })
     })
   }, [])
+
+  // Scroll-triggered entrance
+  useGSAP(
+    () => {
+      const prefersReduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+      if (prefersReduced) return
+
+      gsap.set(containerRef.current, { autoAlpha: 0, y: 50 })
+      gsap.to(containerRef.current, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+    },
+    { scope: containerRef },
+  )
 
   useGSAP(
     () => {
@@ -117,6 +178,19 @@ function EllipseCarousel() {
       tl.to(rotationRef.current, { value: 180, duration: 6, ease: 'sine.inOut' })
       tl.to(rotationRef.current, { value: 270, duration: 2, ease: 'power2.inOut' })
       tl.to(rotationRef.current, { value: 360, duration: 6, ease: 'sine.inOut' })
+
+      // Scroll-driven explosion — ellipse breaks apart as you scroll past
+      gsap.to(explodeProgress.current, {
+        value: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'center center',
+          end: 'bottom -10%',
+          scrub: true,
+          onUpdate: () => updatePositions(),
+        },
+      })
 
       // Re-layout on resize
       const onResize = () => updatePositions()

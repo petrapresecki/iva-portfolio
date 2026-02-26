@@ -17,6 +17,7 @@ export const projects: Project[] = [
     category: 'Layout design',
     thumbnail: '/images/booklet.jpg',
     year: 2025,
+
   },
   {
     id: 'apuro',
@@ -25,6 +26,7 @@ export const projects: Project[] = [
     category: 'Packaging',
     thumbnail: '/images/apuro.jpg',
     year: 2025,
+
   },
   {
     id: 'rool',
@@ -33,6 +35,7 @@ export const projects: Project[] = [
     category: 'Branding',
     thumbnail: '/images/rool.jpg',
     year: 2025,
+
   },
   {
     id: 'ulicni_fenjer',
@@ -41,5 +44,6 @@ export const projects: Project[] = [
     category: 'Illustration',
     thumbnail: '/images/ulicni_fenjer.jpg',
     year: 2025,
+
   },
 ]

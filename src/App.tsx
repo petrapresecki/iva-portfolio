@@ -18,7 +18,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <div className="grain">
       <CustomCursor />
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <div className={`min-h-screen ${activeTab === 'portfolio' ? 'bg-black' : 'bg-accent'}`}>
@@ -50,7 +50,7 @@ function App() {
           )}
         </AnimatePresence>
       </div>
-    </>
+    </div>
   )
 }
 

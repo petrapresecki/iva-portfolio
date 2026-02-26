@@ -1,6 +1,7 @@
-import { useRef } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
+import { useRef, useState } from 'react'
+import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
 import { projects } from '@/data/projects'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 const GAP = 24 // gap between cards in px
 
@@ -10,6 +11,19 @@ function ProjectsGrid() {
   const isAnimating = useRef(false)
   const prevBtnRef = useRef<HTMLButtonElement>(null)
   const nextBtnRef = useRef<HTMLButtonElement>(null)
+
+  // Scroll entrance refs
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<(HTMLElement | null)[]>([])
+
+  const reducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Scramble triggers — set to true by ScrollTrigger callbacks
+  const [headingRevealed, setHeadingRevealed] = useState(false)
+  const [cardsRevealed, setCardsRevealed] = useState(false)
 
   // Calculate how far to shift per step
   const getCardWidth = () => {
@@ -42,6 +56,55 @@ function ProjectsGrid() {
     updateButtons()
   })
 
+  // Scroll-triggered entrances
+  useGSAP(
+    () => {
+      if (reducedMotion) return
+
+      gsap.set(headerRef.current, { autoAlpha: 0, y: 30 })
+      gsap.to(headerRef.current, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      const cards = cardsRef.current.filter(Boolean) as HTMLElement[]
+      gsap.set(cards, { autoAlpha: 0, y: 40 })
+      gsap.to(cards, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: trackRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      // Text scramble triggers
+      ScrollTrigger.create({
+        trigger: headerRef.current,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => setHeadingRevealed(true),
+      })
+
+      ScrollTrigger.create({
+        trigger: trackRef.current,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => setCardsRevealed(true),
+      })
+    },
+    { scope: sectionRef },
+  )
+
   const navigate = (direction: -1 | 1) => {
     if (isAnimating.current) return
     const next = currentIndex.current + direction
@@ -63,11 +126,13 @@ function ProjectsGrid() {
   }
 
   return (
-    <section className="pb-16 md:pb-32">
+    <section ref={sectionRef} className="pb-16 md:pb-32">
       {/* Header row */}
-      <div className="mb-8 flex items-center justify-between px-6 md:mb-12 md:px-16">
+      <div ref={headerRef} className="mb-8 flex items-center justify-between px-6 md:mb-12 md:px-16">
         <h2 className="font-display text-4xl font-bold text-accent md:text-7xl">
-          Projects
+          {reducedMotion ? 'Projects' : (
+            <ScrambleText text="Projects" play={headingRevealed} charDelay={70} cycleSpeed={35} />
+          )}
         </h2>
 
         <div className="flex gap-2 md:gap-3">
@@ -75,7 +140,7 @@ function ProjectsGrid() {
             ref={prevBtnRef}
             onClick={() => navigate(-1)}
             aria-label="Previous projects"
-            className="transition-opacity disabled:opacity-40"
+            className="group/btn transition-all duration-300 disabled:opacity-30"
           >
             <ArrowLeft />
           </button>
@@ -83,7 +148,7 @@ function ProjectsGrid() {
             ref={nextBtnRef}
             onClick={() => navigate(1)}
             aria-label="Next projects"
-            className="transition-opacity disabled:opacity-40"
+            className="group/btn transition-all duration-300 disabled:opacity-30"
           >
             <ArrowRight />
           </button>
@@ -97,18 +162,18 @@ function ProjectsGrid() {
           className="flex pl-6 md:pl-16"
           style={{ gap: GAP }}
         >
-          {/* Mobile: ~85vw cards, Tablet: 2 visible, Desktop: 3 visible */}
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article
               key={project.id}
-              className="w-[85vw] shrink-0 sm:w-[calc((100vw-48px-24px)/2)] lg:w-[calc((100vw-128px-48px)/3)]"
+              ref={(el) => { cardsRef.current[index] = el }}
+              className="group w-[85vw] shrink-0 cursor-pointer sm:w-[calc((100vw-48px-24px)/2)] lg:w-[calc((100vw-128px-48px)/3)]"
             >
               {/* Thumbnail */}
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-white md:rounded-2xl">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
@@ -116,9 +181,15 @@ function ProjectsGrid() {
               {/* Info */}
               <div className="mt-4 md:mt-5">
                 <h3 className="inline-block bg-accent px-2 font-display text-2xl font-bold text-black rounded-lg md:text-4xl">
-                  {project.title}
+                  {reducedMotion ? project.title : (
+                    <ScrambleText text={project.title} play={cardsRevealed} delay={index * 150} />
+                  )}
                 </h3>
-                <p className="mt-1 text-base text-gray md:text-lg">{project.category}</p>
+                <p className="mt-1 text-base text-gray md:text-lg">
+                  {reducedMotion ? project.category : (
+                    <ScrambleText text={project.category} play={cardsRevealed} delay={index * 150 + 80} />
+                  )}
+                </p>
               </div>
             </article>
           ))}
@@ -131,8 +202,8 @@ function ProjectsGrid() {
 function ArrowLeft() {
   return (
     <svg className="size-9 md:size-[46px]" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="46" height="46" rx="23" transform="matrix(-1 0 0 1 46 0)" fill="#AAAAAA" />
-      <path d="M32 22C32.5523 22 33 22.4477 33 23C33 23.5523 32.5523 24 32 24L32 23L32 22ZM12.7929 23.7071C12.4024 23.3166 12.4024 22.6834 12.7929 22.2929L19.1569 15.9289C19.5474 15.5384 20.1805 15.5384 20.5711 15.9289C20.9616 16.3195 20.9616 16.9526 20.5711 17.3431L14.9142 23L20.5711 28.6569C20.9616 29.0474 20.9616 29.6805 20.5711 30.0711C20.1805 30.4616 19.5474 30.4616 19.1569 30.0711L12.7929 23.7071ZM32 23L32 24L13.5 24L13.5 23L13.5 22L32 22L32 23Z" fill="black" />
+      <circle cx="23" cy="23" r="22" className="stroke-accent transition-colors duration-300 group-hover/btn:fill-accent" strokeWidth="1.5" />
+      <path d="M27 15L19 23L27 31" className="stroke-accent transition-colors duration-300 group-hover/btn:stroke-black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -140,8 +211,8 @@ function ArrowLeft() {
 function ArrowRight() {
   return (
     <svg className="size-9 md:size-[46px]" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="46" height="46" rx="23" fill="#AAAAAA" />
-      <path d="M14 22C13.4477 22 13 22.4477 13 23C13 23.5523 13.4477 24 14 24L14 23L14 22ZM33.2071 23.7071C33.5976 23.3166 33.5976 22.6834 33.2071 22.2929L26.8431 15.9289C26.4526 15.5384 25.8195 15.5384 25.4289 15.9289C25.0384 16.3195 25.0384 16.9526 25.4289 17.3431L31.0858 23L25.4289 28.6569C25.0384 29.0474 25.0384 29.6805 25.4289 30.0711C25.8195 30.4616 26.4526 30.4616 26.8431 30.0711L33.2071 23.7071ZM14 23L14 24L32.5 24L32.5 23L32.5 22L14 22L14 23Z" fill="black" />
+      <circle cx="23" cy="23" r="22" className="stroke-accent transition-colors duration-300 group-hover/btn:fill-accent" strokeWidth="1.5" />
+      <path d="M19 15L27 23L19 31" className="stroke-accent transition-colors duration-300 group-hover/btn:stroke-black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
