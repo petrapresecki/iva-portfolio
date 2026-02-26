@@ -3,8 +3,13 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import Marquee from '@/components/ui/Marquee'
 import EllipseCarousel from '@/components/ui/EllipseCarousel'
 import ProjectsGrid from '@/components/sections/ProjectsGrid'
+import type { Project } from '@/data/projects'
 
-function Portfolio() {
+interface PortfolioProps {
+  onProjectClick: (project: Project) => void
+}
+
+function Portfolio({ onProjectClick }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -65,7 +70,7 @@ function Portfolio() {
         <EllipseCarousel />
       </div>
       <div ref={gridRef}>
-        <ProjectsGrid />
+        <ProjectsGrid onProjectClick={onProjectClick} />
       </div>
     </section>
   )

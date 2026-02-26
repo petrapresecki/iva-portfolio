@@ -1,11 +1,16 @@
 import { useRef, useState } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
 import { projects } from '@/data/projects'
+import type { Project } from '@/data/projects'
 import ScrambleText from '@/components/ui/ScrambleText'
 
 const GAP = 24 // gap between cards in px
 
-function ProjectsGrid() {
+interface ProjectsGridProps {
+  onProjectClick: (project: Project) => void
+}
+
+function ProjectsGrid({ onProjectClick }: ProjectsGridProps) {
   const trackRef = useRef<HTMLDivElement>(null)
   const currentIndex = useRef(0)
   const isAnimating = useRef(false)
@@ -166,6 +171,7 @@ function ProjectsGrid() {
             <article
               key={project.id}
               ref={(el) => { cardsRef.current[index] = el }}
+              onClick={() => onProjectClick(project)}
               className="group w-[85vw] shrink-0 cursor-pointer sm:w-[calc((100vw-48px-24px)/2)] lg:w-[calc((100vw-128px-48px)/3)]"
             >
               {/* Thumbnail */}
