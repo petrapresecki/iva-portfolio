@@ -26,24 +26,6 @@ function ApuroDetail() {
       // Title — trigger scramble at start
       hero.call(() => setTitlePlay(true))
 
-      // Hero video — clip-path curtain + inner zoom-out
-      const videoWrap = ctx.querySelector('[data-a="hero-video"]')
-      const videoEl = videoWrap?.querySelector('video')
-      if (videoWrap && videoEl) {
-        gsap.set(videoWrap, { clipPath: 'inset(100% 0 0 0)' })
-        gsap.set(videoEl, { scale: 1.4 })
-        hero.to(
-          videoWrap,
-          { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut' },
-          0.3,
-        )
-        hero.to(
-          videoEl,
-          { scale: 1, duration: 2, ease: 'power2.out' },
-          0.5,
-        )
-      }
-
       // Green star — spin + bounce scale
       const star = ctx.querySelector('[data-a="star"]')
       if (star) {
