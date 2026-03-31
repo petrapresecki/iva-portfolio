@@ -3,6 +3,7 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 import ScrambleText from '@/components/ui/ScrambleText'
+import LazyVideo from '@/components/ui/LazyVideo'
 
 interface PortfolioProps {
   onProjectClick: (project: Project) => void
@@ -156,13 +157,9 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
                 >
                   <div className="project-image overflow-hidden">
                     {project.video ? (
-                      <video
+                      <LazyVideo
                         src={project.video}
                         className="aspect-[16/9] w-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
                       />
                     ) : (
                       <img

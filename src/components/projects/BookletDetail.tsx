@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
+import LazyVideo from '@/components/ui/LazyVideo'
 
 function BookletDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -128,7 +129,7 @@ function BookletDetail() {
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/images/booklet/booklet-ocean.png"
+            src="/images/booklet/booklet-ocean.webp"
             alt="Booklet 3D render"
             className="h-full w-full object-cover"
             loading="lazy"
@@ -218,12 +219,8 @@ function BookletDetail() {
           data-gallery
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
-          <video
+          <LazyVideo
             src="/videos/booklet/booklet-rotation.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
             className="h-full w-full object-cover"
           />
         </div>

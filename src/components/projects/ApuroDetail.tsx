@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
+import LazyVideo from '@/components/ui/LazyVideo'
 
 function ApuroDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -141,7 +142,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-bottle-detail.png"
+              src="/images/apuro/apuro-bottle-detail.webp"
               alt="Apuro bottle detail"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -166,12 +167,8 @@ function ApuroDetail() {
             data-gallery
             className="overflow-hidden rounded-xl md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/apuro/apuro-colors.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -179,12 +176,8 @@ function ApuroDetail() {
             data-gallery
             className="overflow-hidden rounded-xl md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/apuro/apuro-typography.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -196,7 +189,7 @@ function ApuroDetail() {
           className="aspect-[16/9] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/images/apuro/apuro-showcase.png"
+            src="/images/apuro/apuro-showcase.webp"
             alt="Apuro showcase"
             className="h-full w-full object-cover"
             loading="lazy"
@@ -260,7 +253,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-closeup-2.png"
+              src="/images/apuro/apuro-closeup-2.webp"
               alt="Apuro closeup 2"
               className="h-full w-full object-cover"
               loading="lazy"

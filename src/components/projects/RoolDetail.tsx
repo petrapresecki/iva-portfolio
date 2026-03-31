@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
+import LazyVideo from '@/components/ui/LazyVideo'
 
 function RoolDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -130,12 +131,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-mp3-tile.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -143,12 +140,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-carousel.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -160,12 +153,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-poster-klub.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -173,12 +162,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-distortion.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -189,12 +174,8 @@ function RoolDetail() {
           data-gallery
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
-          <video
+          <LazyVideo
             src="/videos/rool/rool-tba-dirtyline.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
             className="h-full w-full object-cover"
           />
         </div>
@@ -205,12 +186,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-story-mp3.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -218,12 +195,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-parti-blur.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -248,12 +221,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-sivo-anim.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -261,12 +230,8 @@ function RoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/rool/rool-poster-anim.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>

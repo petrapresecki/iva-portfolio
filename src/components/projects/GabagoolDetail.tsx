@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
+import LazyVideo from '@/components/ui/LazyVideo'
 
 function GabagoolDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -78,7 +79,7 @@ function GabagoolDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <img
-            src="/images/gabagool/gabagool-showcase.png"
+            src="/images/gabagool/gabagool-showcase.webp"
             alt="Gabagool showcase"
             className="h-full w-full object-cover"
           />
@@ -125,12 +126,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-rotacija-3d.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -138,12 +135,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-sfera-meats.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -155,12 +148,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-balls-bouncing.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -168,12 +157,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-kuponi.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -185,12 +170,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-cupons-carousel.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -199,7 +180,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/gabagool/gabagool-packaging.png"
+              src="/images/gabagool/gabagool-packaging.webp"
               alt="Gabagool packaging"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -213,12 +194,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-blobs-motion.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -227,7 +204,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/gabagool/gabagool-bag.png"
+              src="/images/gabagool/gabagool-bag.webp"
               alt="Gabagool bag"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -241,12 +218,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-type-tiles.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
@@ -254,12 +227,8 @@ function GabagoolDetail() {
             data-gallery
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
-            <video
+            <LazyVideo
               src="/videos/gabagool/gabagool-colors.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
               className="h-full w-full object-cover"
             />
           </div>
