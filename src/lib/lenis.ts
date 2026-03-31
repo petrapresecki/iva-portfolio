@@ -19,6 +19,10 @@ export function initLenis(): Lenis {
   return lenisInstance
 }
 
+export function getLenis(): Lenis | null {
+  return lenisInstance
+}
+
 export function destroyLenis() {
   if (lenisInstance) {
     lenisInstance.destroy()

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { getLenis } from '@/lib/lenis'
 import type { Project } from '@/data/projects'
 import ApuroDetail from '@/components/projects/ApuroDetail'
 import RoolDetail from '@/components/projects/RoolDetail'
@@ -21,7 +22,12 @@ const projectComponents: Record<string, React.ComponentType> = {
 function ProjectDetail({ project, onClose }: ProjectDetailProps) {
   // Scroll to top when opening a project
   useEffect(() => {
-    window.scrollTo(0, 0)
+    const lenis = getLenis()
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
   }, [project.id])
 
   const Content = projectComponents[project.id]
