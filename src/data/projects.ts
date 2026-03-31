@@ -23,23 +23,23 @@ export interface Project {
   gallery?: GalleryBlock[]
 }
 
-// Placeholder — Iva will fill this in with her real projects
 export const projects: Project[] = [
   {
-    id: 'booklet',
-    title: 'Booklet',
-    description: 'Layout design project.',
-    category: 'Layout design',
-    thumbnail: '/images/booklet.jpg',
-    year: 2025,
-
+    id: 'rool',
+    title: 'Rool',
+    description: 'Branding project.',
+    category: 'Branding, visual identity',
+    thumbnail: '/images/rool.jpg',
+    video: '/videos/rool.mp4',
+    year: 2026,
   },
   {
     id: 'apuro',
     title: 'Apuro',
     description: 'Packaging design project.',
-    category: 'Packaging',
+    category: 'Branding, packaging, visual identity',
     thumbnail: '/images/apuro.jpg',
+    video: '/videos/apuro.mp4',
     year: 2025,
     longDescription:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -66,21 +66,21 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'rool',
-    title: 'Rool',
-    description: 'Branding project.',
-    category: 'Branding',
-    thumbnail: '/images/rool.jpg',
+    id: 'booklet',
+    title: 'Booklet',
+    description: 'Editorial design project.',
+    category: 'Editorial design, cover design',
+    thumbnail: '/images/booklet.jpg',
+    video: '/videos/booklet.mp4',
     year: 2025,
-
   },
   {
-    id: 'ulicni_fenjer',
-    title: 'Ulični fenjer',
-    description: 'Illustration project.',
-    category: 'Illustration',
-    thumbnail: '/images/ulicni_fenjer.jpg',
-    year: 2025,
-
+    id: 'gabagool',
+    title: 'Gabagool',
+    description: 'Branding project.',
+    category: 'Branding, visual identity',
+    thumbnail: '/images/gabagool.jpg',
+    video: '/videos/gabagool.mp4',
+    year: 2026,
   },
 ]

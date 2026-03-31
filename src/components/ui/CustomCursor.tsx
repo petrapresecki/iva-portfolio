@@ -1,15 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from '@/lib/gsap'
 import cursorSvg from '@/assets/cursor.svg'
+import cursorHoverSvg from '@/assets/cursor-hover.svg'
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
+  const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
     const cursor = cursorRef.current
     if (!cursor) return
 
-    // Set initial position off-screen
     gsap.set(cursor, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
 
     const onMouseMove = (e: MouseEvent) => {
@@ -19,6 +20,9 @@ export default function CustomCursor() {
         duration: 0.15,
         ease: 'power2.out',
       })
+
+      const target = e.target as HTMLElement
+      setHovering(!!target.closest('.project-link'))
     }
 
     const onMouseLeave = () => {
@@ -45,7 +49,14 @@ export default function CustomCursor() {
       ref={cursorRef}
       className="pointer-events-none fixed top-0 left-0 z-[9999]"
     >
-      <img src={cursorSvg} alt="" width={40} height={37} draggable={false} />
+      <img
+        src={hovering ? cursorHoverSvg : cursorSvg}
+        alt=""
+        width={hovering ? 75 : 40}
+        height={hovering ? 88 : 37}
+        draggable={false}
+        className="transition-all duration-150"
+      />
     </div>
   )
 }

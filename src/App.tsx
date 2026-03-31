@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { initLenis, destroyLenis } from '@/lib/lenis'
-import Header from '@/components/layout/Header'
 import Portfolio from '@/components/sections/Portfolio'
 import ProjectDetail from '@/components/sections/ProjectDetail'
+import About from '@/components/sections/About'
 import CustomCursor from '@/components/ui/CustomCursor'
 import type { Project } from '@/data/projects'
 
@@ -54,8 +54,7 @@ function App() {
   return (
     <div className="grain">
       <CustomCursor />
-      <Header activeTab={activeTab} onTabChange={handleTabChange} />
-      <div className={`min-h-screen ${activeTab === 'portfolio' ? 'bg-black' : 'bg-accent'}`}>
+      <div className="min-h-screen bg-black">
         <AnimatePresence mode="wait">
           {selectedProject ? (
             <motion.main
@@ -78,7 +77,7 @@ function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Portfolio onProjectClick={handleProjectClick} />
+              <Portfolio onProjectClick={handleProjectClick} onTabChange={handleTabChange} />
             </motion.main>
           ) : (
             <motion.main
@@ -88,11 +87,7 @@ function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex items-center justify-center min-h-screen">
-                <p className="font-display text-2xl text-black font-semibold">
-                  About section coming soon
-                </p>
-              </div>
+              <About />
             </motion.main>
           )}
         </AnimatePresence>
