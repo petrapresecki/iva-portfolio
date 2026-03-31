@@ -110,7 +110,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
       </div>
 
       {/* Project list */}
-      <div className="mt-12 px-6 md:mt-20 md:px-[60px]">
+      <div className="mt-12 md:mt-20">
         {projects.map((project, index) => {
           const imageRight = index % 2 === 0
           return (
@@ -124,7 +124,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
 
               {/* Title row — clickable, highlight on hover */}
               <div
-                className="group cursor-pointer overflow-hidden py-3 transition-colors duration-200 hover:bg-accent md:py-4 project-link"
+                className="group cursor-pointer overflow-hidden px-6 py-3 transition-colors duration-200 hover:bg-accent md:px-[60px] md:py-4 project-link"
                 onClick={() => onProjectClick(project)}
               >
                 <h3 className="project-title font-display text-[40px] font-bold leading-tight text-accent transition-colors duration-200 group-hover:text-black md:text-[64px]">
@@ -142,7 +142,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
 
               {/* Image + metadata area */}
               <div
-                className={`flex flex-col gap-6 py-8 md:py-12 ${
+                className={`flex flex-col gap-6 px-6 py-8 md:px-[60px] md:py-12 ${
                   imageRight
                     ? 'md:items-end'
                     : 'md:items-start'
