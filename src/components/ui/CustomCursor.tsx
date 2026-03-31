@@ -3,11 +3,15 @@ import { gsap } from '@/lib/gsap'
 import cursorSvg from '@/assets/cursor.svg'
 import cursorHoverSvg from '@/assets/cursor-hover.svg'
 
+const isFinePointer = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
+
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
+    if (!isFinePointer) return
+
     const cursor = cursorRef.current
     if (!cursor) return
 
@@ -43,6 +47,8 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', onMouseEnter)
     }
   }, [])
+
+  if (!isFinePointer) return null
 
   return (
     <div

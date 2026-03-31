@@ -24,10 +24,12 @@ body {
   color: var(--color-black);
 }
 
-*,
-*::before,
-*::after {
-  cursor: none !important;
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }
 
 /* Lenis smooth scroll */
