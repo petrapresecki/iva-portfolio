@@ -86,51 +86,18 @@ function ApuroDetail() {
       // ────────────────────────────────────────
       const infoSection = ctx.querySelector('[data-a="info"]')
 
-      const desc = ctx.querySelector('[data-a="desc"]')
-      if (desc) {
-        gsap.set(desc, { y: 40, opacity: 0 })
-        gsap.to(desc, {
+      const infoChildren = infoSection?.querySelectorAll('[data-a="desc"], [data-a="tag"], [data-a="role"]')
+      if (infoChildren?.length) {
+        gsap.set(infoChildren, { y: 20, opacity: 0 })
+        gsap.to(infoChildren, {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: infoSection,
             start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        })
-      }
-
-      // Tags — elastic pop-in + scramble
-      const tags = ctx.querySelectorAll('[data-a="tag"]')
-      if (tags.length) {
-        gsap.set(tags, { scale: 0, opacity: 0 })
-        gsap.to(tags, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'back.out(3)',
-          scrollTrigger: {
-            trigger: infoSection,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        })
-      }
-
-      const role = ctx.querySelector('[data-a="role"]')
-      if (role) {
-        gsap.set(role, { x: 30, opacity: 0 })
-        gsap.to(role, {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: infoSection,
-            start: 'top 75%',
             toggleActions: 'play none none none',
           },
         })
@@ -219,12 +186,16 @@ function ApuroDetail() {
           data-a="desc"
           className="max-w-lg font-body text-sm leading-relaxed text-gray md:text-base"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Apuro is a refreshing craft cider made from organically grown apples from the Zagorje region. Its natural origins and bold character are embodied in a 3D-modeled bottle that follows an organic, fluid shape.
+          <br /><br />
+          The visual identity and branding highlight Apuro's regional roots. A hybrid creature illustration inspired by local animals; rooster, deer, and fox, paired with a dynamic logo, creates an expressive design that communicates its organic and contemporary qualities.
+          <br /><br />
+          The box, made from recycled cardboard, is 3D-modeled to follow the shape of the bottle, making it easy to carry and store. Animations were designed to visually express and reinforce the brand's natural and playful character.
         </p>
 
         <div className="flex flex-col items-start gap-4 md:items-end">
           <div className="flex flex-wrap gap-2">
-            {['cider', 'packaging', 'branding'].map((tag) => (
+            {['Blender', 'Adobe Illustrator', 'Adobe After Effects'].map((tag) => (
               <span
                 key={tag}
                 data-a="tag"
@@ -238,7 +209,7 @@ function ApuroDetail() {
             data-a="role"
             className="font-display text-xs uppercase tracking-[0.15em] text-gray md:text-sm"
           >
-            role: logo, branding, packaging
+            Branding, packaging, visual identity
           </p>
         </div>
       </div>

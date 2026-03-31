@@ -59,10 +59,10 @@ function App() {
           {selectedProject ? (
             <motion.main
               key={`project-${selectedProject.id}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ y: '100vh' }}
+              animate={{ y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ type: 'tween', duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
             >
               <ProjectDetail
                 project={selectedProject}
