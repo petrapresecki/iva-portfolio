@@ -2,31 +2,6 @@ import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
 
-const reveals = [
-  // Row 1: full width — expand from center
-  { from: 'inset(50% 50% 50% 50%)', to: 'inset(0% 0% 0% 0%)' },
-  // Row 2: pair — horizontal wipes
-  { from: 'inset(0 100% 0 0)', to: 'inset(0 0% 0 0)' },
-  { from: 'inset(0 0 0 100%)', to: 'inset(0 0 0 0%)' },
-  // Row 3: pair — diagonal reveals
-  { from: 'polygon(0 0, 0 0, 0 100%, 0 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-  { from: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-  // Row 4: pair — corner reveals
-  { from: 'inset(100% 100% 0 0)', to: 'inset(0% 0% 0 0)' },
-  { from: 'inset(0 0 100% 100%)', to: 'inset(0 0 0% 0%)' },
-  // Row 5: full width — horizontal sweep
-  { from: 'inset(0 0 0 100%)', to: 'inset(0 0 0 0%)' },
-  // Row 6: pair — vertical drops
-  { from: 'inset(0 0 100% 0)', to: 'inset(0 0 0% 0)' },
-  { from: 'inset(100% 0 0 0)', to: 'inset(0% 0 0 0)' },
-  // Row 7: pair — horizontal wipes (reversed)
-  { from: 'inset(0 0 0 100%)', to: 'inset(0 0 0 0%)' },
-  { from: 'inset(0 100% 0 0)', to: 'inset(0 0% 0 0)' },
-  // Row 8: pair — expand from center
-  { from: 'inset(50% 50% 50% 50%)', to: 'inset(0% 0% 0% 0%)' },
-  { from: 'inset(50% 50% 50% 50%)', to: 'inset(0% 0% 0% 0%)' },
-]
-
 function BookletDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [titlePlay, setTitlePlay] = useState(false)
@@ -97,62 +72,6 @@ function BookletDetail() {
         })
       }
 
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-      const items = ctx.querySelectorAll('[data-gallery]')
-      items.forEach((item, i) => {
-        const media = item.querySelector('img, video')
-        if (!media) return
-
-        if (isMobile) {
-          gsap.from(item, {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
-            },
-          })
-          return
-        }
-
-        const reveal = reveals[i % reveals.length]
-
-        gsap.set(item, { clipPath: reveal.from })
-        gsap.set(media, { scale: 1.3 })
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        })
-
-        tl.to(item, {
-          clipPath: reveal.to,
-          duration: 1.3,
-          ease: 'power4.inOut',
-        })
-        tl.to(
-          media,
-          { scale: 1.05, duration: 1.8, ease: 'power2.out' },
-          '-=1',
-        )
-
-        gsap.to(media, {
-          yPercent: -4,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      })
     },
     { scope: containerRef },
   )

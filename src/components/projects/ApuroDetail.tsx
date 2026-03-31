@@ -2,26 +2,6 @@ import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import ScrambleText from '@/components/ui/ScrambleText'
 
-// Each gallery item gets a unique reveal style
-const reveals = [
-  // Row 1: bottles — horizontal wipes, opposite directions
-  { from: 'inset(0 100% 0 0)', to: 'inset(0 0% 0 0)' },     // wipe from left
-  { from: 'inset(0 0 0 100%)', to: 'inset(0 0 0 0%)' },      // wipe from right
-  // Row 2: videos — diagonal reveals
-  { from: 'polygon(0 0, 0 0, 0 100%, 0 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-  { from: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-  // Row 3: showcase — expand from center
-  { from: 'inset(50% 50% 50% 50%)', to: 'inset(0% 0% 0% 0%)' },
-  // Row 4: packaging — corner reveals
-  { from: 'inset(100% 100% 0 0)', to: 'inset(0% 0% 0 0)' },  // from top-right
-  { from: 'inset(0 0 100% 100%)', to: 'inset(0 0 0% 0%)' },   // from bottom-left
-  // Row 5: wide — horizontal sweep
-  { from: 'inset(0 0 0 100%)', to: 'inset(0 0 0 0%)' },
-  // Row 6: closeups — vertical drops
-  { from: 'inset(0 0 100% 0)', to: 'inset(0 0 0% 0)' },      // drop from top
-  { from: 'inset(100% 0 0 0)', to: 'inset(0% 0 0 0)' },      // rise from bottom
-]
-
 function ApuroDetail() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [titlePlay, setTitlePlay] = useState(false)
@@ -103,66 +83,6 @@ function ApuroDetail() {
         })
       }
 
-      // ────────────────────────────────────────
-      // Gallery — unique reveal per item + parallax
-      // ────────────────────────────────────────
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-      const items = ctx.querySelectorAll('[data-gallery]')
-      items.forEach((item, i) => {
-        const media = item.querySelector('img, video')
-        if (!media) return
-
-        if (isMobile) {
-          gsap.from(item, {
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
-            },
-          })
-          return
-        }
-
-        const reveal = reveals[i % reveals.length]
-
-        gsap.set(item, { clipPath: reveal.from })
-        gsap.set(media, { scale: 1.3 })
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        })
-
-        tl.to(item, {
-          clipPath: reveal.to,
-          duration: 1.3,
-          ease: 'power4.inOut',
-        })
-        tl.to(
-          media,
-          { scale: 1.05, duration: 1.8, ease: 'power2.out' },
-          '-=1',
-        )
-
-        // Parallax
-        gsap.to(media, {
-          yPercent: -4,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      })
     },
     { scope: containerRef },
   )

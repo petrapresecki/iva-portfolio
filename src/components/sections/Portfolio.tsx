@@ -1,7 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
+import ScrambleText from '@/components/ui/ScrambleText'
 
 interface PortfolioProps {
   onProjectClick: (project: Project) => void
@@ -9,13 +10,17 @@ interface PortfolioProps {
 
 function Portfolio({ onProjectClick }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null)
+  const [playingTitles, setPlayingTitles] = useState<Set<string>>(new Set())
 
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia(
         '(prefers-reduced-motion: reduce)',
       ).matches
-      if (prefersReduced) return
+      if (prefersReduced) {
+        setPlayingTitles(new Set(projects.map((p) => p.id)))
+        return
+      }
 
       // Heading reveal
       const heading = sectionRef.current?.querySelector('.projects-heading')
@@ -33,48 +38,12 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
         })
       }
 
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-
-      // Each project section animations
+      // Each project: line reveals + scroll-triggered title scramble
       const items = sectionRef.current?.querySelectorAll('.project-item')
-      items?.forEach((el) => {
+      items?.forEach((el, i) => {
         const topLine = el.querySelector('.project-line-top')
-        const title = el.querySelector('.project-title')
         const subLine = el.querySelector('.project-line-sub')
-        const image = el.querySelector('.project-image')
-        const meta = el.querySelector('.project-meta')
 
-        if (isMobile) {
-          // Mobile: simple fade-up for title + image only
-          if (title) {
-            gsap.from(title, {
-              yPercent: 100,
-              duration: 0.7,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: el,
-                start: 'top 85%',
-                toggleActions: 'play none none none',
-              },
-            })
-          }
-          if (image) {
-            gsap.from(image, {
-              opacity: 0,
-              y: 20,
-              duration: 0.6,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: el,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-              },
-            })
-          }
-          return
-        }
-
-        // Desktop: full animations
         if (topLine) {
           gsap.from(topLine, {
             scaleX: 0,
@@ -89,18 +58,16 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
           })
         }
 
-        if (title) {
-          gsap.from(title, {
-            yPercent: 100,
-            duration: 0.9,
-            ease: 'power4.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 80%',
-              toggleActions: 'play none none none',
+        // Trigger title scramble on scroll
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',
+            onEnter: () => {
+              setPlayingTitles((prev) => new Set(prev).add(projects[i].id))
             },
-          })
-        }
+          },
+        })
 
         if (subLine) {
           gsap.from(subLine, {
@@ -112,37 +79,6 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
             scrollTrigger: {
               trigger: el,
               start: 'top 80%',
-              toggleActions: 'play none none none',
-            },
-          })
-        }
-
-        if (image) {
-          gsap.fromTo(
-            image,
-            { clipPath: 'inset(0 100% 0 0)' },
-            {
-              clipPath: 'inset(0 0% 0 0)',
-              duration: 1.2,
-              ease: 'power3.inOut',
-              scrollTrigger: {
-                trigger: el,
-                start: 'top 70%',
-                toggleActions: 'play none none none',
-              },
-            },
-          )
-        }
-
-        if (meta) {
-          gsap.from(meta, {
-            opacity: 0,
-            y: 20,
-            duration: 0.7,
-            delay: 0.3,
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 70%',
               toggleActions: 'play none none none',
             },
           })
@@ -192,7 +128,12 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
                 onClick={() => onProjectClick(project)}
               >
                 <h3 className="project-title font-display text-[40px] font-bold leading-tight text-accent transition-colors duration-200 group-hover:text-black md:text-[64px]">
-                  {project.title}
+                  <ScrambleText
+                    text={project.title}
+                    play={playingTitles.has(project.id)}
+                    charDelay={100}
+                    cycleSpeed={40}
+                  />
                 </h3>
               </div>
 
