@@ -106,10 +106,26 @@ function ApuroDetail() {
       // ────────────────────────────────────────
       // Gallery — unique reveal per item + parallax
       // ────────────────────────────────────────
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
       const items = ctx.querySelectorAll('[data-gallery]')
       items.forEach((item, i) => {
         const media = item.querySelector('img, video')
         if (!media) return
+
+        if (isMobile) {
+          gsap.from(item, {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          })
+          return
+        }
 
         const reveal = reveals[i % reveals.length]
 
@@ -170,7 +186,7 @@ function ApuroDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <video
-            src="/videos/apuro-label-animation.mp4"
+            src="/videos/apuro/apuro-label-animation.mp4"
             autoPlay
             loop
             muted
@@ -223,7 +239,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-bottle-detail.png"
+              src="/images/apuro/apuro-bottle-detail.png"
               alt="Apuro bottle detail"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -234,7 +250,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-bottles.jpg"
+              src="/images/apuro/apuro-bottles.jpg"
               alt="Apuro bottles"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -249,7 +265,7 @@ function ApuroDetail() {
             className="overflow-hidden rounded-xl md:rounded-2xl"
           >
             <video
-              src="/videos/apuro-colors.mp4"
+              src="/videos/apuro/apuro-colors.mp4"
               autoPlay
               loop
               muted
@@ -262,7 +278,7 @@ function ApuroDetail() {
             className="overflow-hidden rounded-xl md:rounded-2xl"
           >
             <video
-              src="/videos/apuro-typography.mp4"
+              src="/videos/apuro/apuro-typography.mp4"
               autoPlay
               loop
               muted
@@ -278,7 +294,7 @@ function ApuroDetail() {
           className="aspect-[16/9] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/images/apuro-showcase.png"
+            src="/images/apuro/apuro-showcase.png"
             alt="Apuro showcase"
             className="h-full w-full object-cover"
             loading="lazy"
@@ -292,7 +308,7 @@ function ApuroDetail() {
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-packaging-1.jpg"
+              src="/images/apuro/apuro-packaging-1.jpg"
               alt="Apuro packaging 1"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -303,7 +319,7 @@ function ApuroDetail() {
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-packaging-2.jpg"
+              src="/images/apuro/apuro-packaging-2.jpg"
               alt="Apuro packaging 2"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -317,7 +333,7 @@ function ApuroDetail() {
           className="aspect-[16/9] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/images/apuro-packaging-wide.jpg"
+            src="/images/apuro/apuro-packaging-wide.jpg"
             alt="Apuro packaging wide"
             className="h-full w-full object-cover"
             loading="lazy"
@@ -331,7 +347,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-closeup-1.jpg"
+              src="/images/apuro/apuro-closeup-1.jpg"
               alt="Apuro closeup 1"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -342,7 +358,7 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro-closeup-2.png"
+              src="/images/apuro/apuro-closeup-2.png"
               alt="Apuro closeup 2"
               className="h-full w-full object-cover"
               loading="lazy"

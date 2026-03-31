@@ -1,8 +1,11 @@
 function About() {
   return (
-    <section className="min-h-screen bg-accent text-black px-6 pb-16 pt-12 md:px-[60px] md:pb-24 md:pt-16">
-      {/* E-MAIL button — top right */}
-      <div className="flex justify-end mb-16 md:mb-24">
+    <section className="min-h-screen bg-accent text-black px-6 pb-16 md:px-[60px] md:pb-24">
+      {/* Hi heading + E-MAIL on same row */}
+      <div className="flex items-center justify-between pt-12 md:pt-24">
+        <h1 className="font-display text-[36px] font-bold tracking-[1.92px] md:text-[48px]">
+          Hi! :)
+        </h1>
         <a
           href="mailto:presecki.iva@gmail.com"
           className="inline-block rounded-full border border-black px-7 py-2 font-display text-[16px] font-bold tracking-[0.8px] transition-colors duration-200 hover:bg-black hover:text-accent md:text-[20px]"
@@ -10,11 +13,6 @@ function About() {
           E-MAIL
         </a>
       </div>
-
-      {/* Hi heading */}
-      <h1 className="font-display text-[36px] font-bold tracking-[1.92px] md:text-[48px]">
-        Hi! :)
-      </h1>
 
       {/* Bio text */}
       <div className="mt-10 max-w-[871px] font-display text-[20px] font-semibold leading-[29px] tracking-[0.96px] md:text-[24px]">

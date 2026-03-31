@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { initLenis, destroyLenis } from '@/lib/lenis'
+import Header from '@/components/layout/Header'
 import Portfolio from '@/components/sections/Portfolio'
 import ProjectDetail from '@/components/sections/ProjectDetail'
 import About from '@/components/sections/About'
@@ -77,16 +78,19 @@ function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Portfolio onProjectClick={handleProjectClick} onTabChange={handleTabChange} />
+              <Header activeTab={activeTab} onTabChange={handleTabChange} variant="dark" />
+              <Portfolio onProjectClick={handleProjectClick} />
             </motion.main>
           ) : (
             <motion.main
               key="about"
+              className="bg-accent"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
+              <Header activeTab={activeTab} onTabChange={handleTabChange} variant="light" />
               <About />
             </motion.main>
           )}

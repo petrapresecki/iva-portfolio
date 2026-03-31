@@ -97,10 +97,26 @@ function BookletDetail() {
         })
       }
 
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
       const items = ctx.querySelectorAll('[data-gallery]')
       items.forEach((item, i) => {
         const media = item.querySelector('img, video')
         if (!media) return
+
+        if (isMobile) {
+          gsap.from(item, {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          })
+          return
+        }
 
         const reveal = reveals[i % reveals.length]
 
@@ -160,7 +176,7 @@ function BookletDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <video
-            src="/videos/booklet/booklet-hero.mp4"
+            src="/images/booklet/booklet-hero.mp4"
             autoPlay
             loop
             muted
@@ -210,7 +226,7 @@ function BookletDetail() {
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/videos/booklet/booklet-ocean.png"
+            src="/images/booklet/booklet-ocean.png"
             alt="Booklet 3D render"
             className="h-full w-full object-cover"
             loading="lazy"
@@ -224,7 +240,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-1.jpg"
+              src="/images/booklet/booklet-spread-1.jpg"
               alt="Booklet spread 1"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -235,7 +251,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-2.jpg"
+              src="/images/booklet/booklet-spread-2.jpg"
               alt="Booklet spread 2"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -250,7 +266,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-3.jpg"
+              src="/images/booklet/booklet-spread-3.jpg"
               alt="Booklet spread 3"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -261,7 +277,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-4.jpg"
+              src="/images/booklet/booklet-spread-4.jpg"
               alt="Booklet spread 4"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -276,7 +292,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-5.jpg"
+              src="/images/booklet/booklet-spread-5.jpg"
               alt="Booklet spread 5"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -287,7 +303,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-6.jpg"
+              src="/images/booklet/booklet-spread-6.jpg"
               alt="Booklet spread 6"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -301,7 +317,7 @@ function BookletDetail() {
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <video
-            src="/videos/booklet/booklet-rotation.mp4"
+            src="/images/booklet/booklet-rotation.mp4"
             autoPlay
             loop
             muted
@@ -317,7 +333,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-7.jpg"
+              src="/images/booklet/booklet-spread-7.jpg"
               alt="Booklet spread 7"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -328,7 +344,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-8.jpg"
+              src="/images/booklet/booklet-spread-8.jpg"
               alt="Booklet spread 8"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -343,7 +359,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-9.jpg"
+              src="/images/booklet/booklet-spread-9.jpg"
               alt="Booklet spread 9"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -354,7 +370,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-10.jpg"
+              src="/images/booklet/booklet-spread-10.jpg"
               alt="Booklet spread 10"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -369,7 +385,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-11.jpg"
+              src="/images/booklet/booklet-spread-11.jpg"
               alt="Booklet spread 11"
               className="h-full w-full object-cover"
               loading="lazy"
@@ -380,7 +396,7 @@ function BookletDetail() {
             className="aspect-[13/10] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/videos/booklet/booklet-spread-12.jpg"
+              src="/images/booklet/booklet-spread-12.jpg"
               alt="Booklet spread 12"
               className="h-full w-full object-cover"
               loading="lazy"

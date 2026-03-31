@@ -94,10 +94,26 @@ function RoolDetail() {
       }
 
       // Gallery — unique reveal per item + parallax
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
       const items = ctx.querySelectorAll('[data-gallery]')
       items.forEach((item, i) => {
         const media = item.querySelector('img, video')
         if (!media) return
+
+        if (isMobile) {
+          gsap.from(item, {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          })
+          return
+        }
 
         const reveal = reveals[i % reveals.length]
 
@@ -312,7 +328,7 @@ function RoolDetail() {
           className="aspect-[4/3] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/videos/rool/rool-composition.jpg"
+            src="/images/rool/rool-composition.jpg"
             alt="Rool composition"
             className="h-full w-full object-cover"
             loading="lazy"

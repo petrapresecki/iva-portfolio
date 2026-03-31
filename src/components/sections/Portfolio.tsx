@@ -3,14 +3,11 @@ import { gsap, useGSAP } from '@/lib/gsap'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 
-type Tab = 'portfolio' | 'about'
-
 interface PortfolioProps {
   onProjectClick: (project: Project) => void
-  onTabChange: (tab: Tab) => void
 }
 
-function Portfolio({ onProjectClick, onTabChange }: PortfolioProps) {
+function Portfolio({ onProjectClick }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useGSAP(
@@ -36,6 +33,8 @@ function Portfolio({ onProjectClick, onTabChange }: PortfolioProps) {
         })
       }
 
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
+
       // Each project section animations
       const items = sectionRef.current?.querySelectorAll('.project-item')
       items?.forEach((el) => {
@@ -45,6 +44,37 @@ function Portfolio({ onProjectClick, onTabChange }: PortfolioProps) {
         const image = el.querySelector('.project-image')
         const meta = el.querySelector('.project-meta')
 
+        if (isMobile) {
+          // Mobile: simple fade-up for title + image only
+          if (title) {
+            gsap.from(title, {
+              yPercent: 100,
+              duration: 0.7,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+              },
+            })
+          }
+          if (image) {
+            gsap.from(image, {
+              opacity: 0,
+              y: 20,
+              duration: 0.6,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+              },
+            })
+          }
+          return
+        }
+
+        // Desktop: full animations
         if (topLine) {
           gsap.from(topLine, {
             scaleX: 0,
@@ -124,22 +154,6 @@ function Portfolio({ onProjectClick, onTabChange }: PortfolioProps) {
 
   return (
     <section ref={sectionRef} className="min-h-screen bg-black">
-      {/* Nav buttons */}
-      <nav className="flex justify-end gap-3 px-6 py-6 md:px-[60px] md:py-[30px]">
-        <button
-          onClick={() => onTabChange('portfolio')}
-          className="cursor-pointer rounded-full bg-accent px-5 py-1.5 font-display text-[14px] font-medium text-black md:px-7 md:py-2 md:text-[20px]"
-        >
-          PORTFOLIO
-        </button>
-        <button
-          onClick={() => onTabChange('about')}
-          className="cursor-pointer rounded-full bg-accent px-5 py-1.5 font-display text-[14px] font-medium text-black md:px-7 md:py-2 md:text-[20px]"
-        >
-          ABOUT
-        </button>
-      </nav>
-
       {/* Hero video */}
       <div className="px-6 md:px-[60px]">
         <video
@@ -166,7 +180,8 @@ function Portfolio({ onProjectClick, onTabChange }: PortfolioProps) {
           return (
             <div
               key={project.id}
-              className="project-item"
+              className="project-item cursor-pointer md:cursor-default"
+              onClick={() => onProjectClick(project)}
             >
               {/* Top line */}
               <div className="project-line-top h-[3px] bg-accent" />
