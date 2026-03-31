@@ -15,9 +15,6 @@ function LazyVideo({ src, className }: LazyVideoProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!video.src) {
-            video.src = src
-          }
           video.play().catch(() => {})
         } else {
           video.pause()
@@ -33,6 +30,7 @@ function LazyVideo({ src, className }: LazyVideoProps) {
   return (
     <video
       ref={videoRef}
+      src={src}
       loop
       muted
       playsInline
