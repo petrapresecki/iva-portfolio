@@ -44,27 +44,6 @@ function ApuroDetail() {
         )
       }
 
-      // ────────────────────────────────────────
-      // Info section — scroll-triggered
-      // ────────────────────────────────────────
-      const infoSection = ctx.querySelector('[data-a="info"]')
-
-      const infoChildren = infoSection?.querySelectorAll('[data-a="desc"], [data-a="tag"], [data-a="role"]')
-      if (infoChildren?.length) {
-        gsap.set(infoChildren, { y: 20, opacity: 0 })
-        gsap.to(infoChildren, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: infoSection,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        })
-      }
 
     },
     { scope: containerRef },
