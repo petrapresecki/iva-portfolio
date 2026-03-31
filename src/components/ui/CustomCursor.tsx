@@ -3,14 +3,20 @@ import { gsap } from '@/lib/gsap'
 import cursorSvg from '@/assets/cursor.svg'
 import cursorHoverSvg from '@/assets/cursor-hover.svg'
 
-const isFinePointer = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
-
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const [hovering, setHovering] = useState(false)
+  const [enabled, setEnabled] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return (
+      window.matchMedia('(pointer: fine)').matches &&
+      window.matchMedia('(hover: hover)').matches &&
+      !('ontouchstart' in window)
+    )
+  })
 
   useEffect(() => {
-    if (!isFinePointer) return
+    if (!enabled) return
 
     const cursor = cursorRef.current
     if (!cursor) return
@@ -37,18 +43,29 @@ export default function CustomCursor() {
       gsap.to(cursor, { opacity: 1, duration: 0.2 })
     }
 
+    // Kill cursor immediately if a touch is detected
+    const onTouchStart = () => {
+      setEnabled(false)
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseenter', onMouseEnter)
+      window.removeEventListener('touchstart', onTouchStart)
+    }
+
     window.addEventListener('mousemove', onMouseMove)
     document.addEventListener('mouseleave', onMouseLeave)
     document.addEventListener('mouseenter', onMouseEnter)
+    window.addEventListener('touchstart', onTouchStart, { once: true })
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseleave', onMouseLeave)
       document.removeEventListener('mouseenter', onMouseEnter)
+      window.removeEventListener('touchstart', onTouchStart)
     }
-  }, [])
+  }, [enabled])
 
-  if (!isFinePointer) return null
+  if (!enabled) return null
 
   return (
     <div

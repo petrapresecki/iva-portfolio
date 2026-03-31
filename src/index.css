@@ -24,7 +24,7 @@ body {
   color: var(--color-black);
 }
 
-@media (pointer: fine) {
+@media (pointer: fine) and (hover: hover) {
   *,
   *::before,
   *::after {
