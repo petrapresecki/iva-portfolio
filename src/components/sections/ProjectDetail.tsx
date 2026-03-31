@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { Project } from '@/data/projects'
 import ApuroDetail from '@/components/projects/ApuroDetail'
+import RoolDetail from '@/components/projects/RoolDetail'
+import GabagoolDetail from '@/components/projects/GabagoolDetail'
+import BookletDetail from '@/components/projects/BookletDetail'
 
 interface ProjectDetailProps {
   project: Project
@@ -10,6 +13,9 @@ interface ProjectDetailProps {
 
 const projectComponents: Record<string, React.ComponentType> = {
   apuro: ApuroDetail,
+  rool: RoolDetail,
+  gabagool: GabagoolDetail,
+  booklet: BookletDetail,
 }
 
 function ProjectDetail({ project, onClose }: ProjectDetailProps) {
