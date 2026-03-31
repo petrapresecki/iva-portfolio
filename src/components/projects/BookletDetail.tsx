@@ -95,7 +95,7 @@ function BookletDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <video
-            src="/images/booklet/booklet-hero.mp4"
+            src="/videos/booklet/booklet-hero.mp4"
             autoPlay
             loop
             muted
@@ -236,7 +236,7 @@ function BookletDetail() {
           className="aspect-video overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <video
-            src="/images/booklet/booklet-rotation.mp4"
+            src="/videos/booklet/booklet-rotation.mp4"
             autoPlay
             loop
             muted

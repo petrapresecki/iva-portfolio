@@ -143,7 +143,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-rotacija-3d.mp4"
+              src="/videos/gabagool/gabagool-rotacija-3d.mp4"
               autoPlay
               loop
               muted
@@ -156,7 +156,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-sfera-meats.mp4"
+              src="/videos/gabagool/gabagool-sfera-meats.mp4"
               autoPlay
               loop
               muted
@@ -173,7 +173,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-balls-bouncing.mp4"
+              src="/videos/gabagool/gabagool-balls-bouncing.mp4"
               autoPlay
               loop
               muted
@@ -186,7 +186,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-kuponi.mp4"
+              src="/videos/gabagool/gabagool-kuponi.mp4"
               autoPlay
               loop
               muted
@@ -203,7 +203,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-cupons-carousel.mp4"
+              src="/videos/gabagool/gabagool-cupons-carousel.mp4"
               autoPlay
               loop
               muted
@@ -231,7 +231,7 @@ function GabagoolDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-blobs-motion.mp4"
+              src="/videos/gabagool/gabagool-blobs-motion.mp4"
               autoPlay
               loop
               muted
@@ -259,7 +259,7 @@ function GabagoolDetail() {
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-type-tiles.mp4"
+              src="/videos/gabagool/gabagool-type-tiles.mp4"
               autoPlay
               loop
               muted
@@ -272,7 +272,7 @@ function GabagoolDetail() {
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <video
-              src="/images/gabagool/gabagool-colors.mp4"
+              src="/videos/gabagool/gabagool-colors.mp4"
               autoPlay
               loop
               muted
