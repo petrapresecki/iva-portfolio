@@ -7,7 +7,7 @@ Graphic designer portfolio — single-page static site.
 - **Framework**: Vite + React + TypeScript
 - **Styling**: Tailwind CSS v4 (CSS-first config in `src/index.css`)
 - **Animations**: GSAP (scroll/timelines) + Framer Motion (UI transitions) + Lenis (smooth scroll)
-- **Deployment**: Vercel (auto-deploy from `main`)
+- **Deployment**: Netlify (auto-deploy from `main`)
 - **Package manager**: pnpm
 
 ## Commands
