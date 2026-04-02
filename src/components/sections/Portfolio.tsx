@@ -121,14 +121,17 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
               onClick={() => onProjectClick(project)}
             >
               {/* Top line */}
-              <div className="project-line-top h-[3px] bg-accent" />
+              <div className="px-6 md:px-[60px]">
+                <div className="project-line-top h-[3px] bg-accent" />
+              </div>
 
               {/* Title row — clickable, highlight on hover */}
+              <div className="px-6 md:px-[60px]">
               <div
-                className="group cursor-pointer overflow-hidden px-6 py-3 transition-colors duration-200 hover:bg-accent md:px-[60px] md:py-4 project-link"
+                className="group relative cursor-pointer overflow-hidden px-4 py-3 md:px-[18px] md:py-4 project-link before:absolute before:inset-0 before:translate-y-full before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-y-0"
                 onClick={() => onProjectClick(project)}
               >
-                <h3 className="project-title font-display text-[40px] font-bold leading-tight text-accent transition-colors duration-200 group-hover:text-black md:text-[64px]">
+                <h3 className="project-title relative z-10 font-display text-[40px] font-bold leading-tight text-accent transition-colors duration-200 group-hover:text-black md:text-[64px]">
                   <ScrambleText
                     text={project.title}
                     play={playingTitles.has(project.id)}
@@ -137,9 +140,12 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
                   />
                 </h3>
               </div>
+              </div>
 
               {/* Sub line */}
-              <div className="project-line-sub h-[3px] bg-accent" />
+              <div className="px-6 md:px-[60px]">
+                <div className="project-line-sub h-[3px] bg-accent" />
+              </div>
 
               {/* Image + metadata area */}
               <div
