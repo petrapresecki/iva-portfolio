@@ -34,7 +34,7 @@ function LazyVideo({ src, className }: LazyVideoProps) {
       loop
       muted
       playsInline
-      preload="auto"
+      preload="metadata"
       className={className}
     />
   )
