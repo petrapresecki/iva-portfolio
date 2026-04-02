@@ -167,24 +167,6 @@ function ApuroDetail() {
           />
         </div>
 
-        {/* Row 4: font specimen */}
-        <div
-          data-gallery
-          className="overflow-hidden rounded-xl md:rounded-2xl"
-        >
-          <div className="flex items-center justify-center bg-accent px-8 py-16 md:py-24">
-            <div className="text-center font-body text-black">
-              <p className="mb-2 text-sm uppercase tracking-widest text-black/60">Gotoshi Regular</p>
-              <p className="text-3xl leading-relaxed md:text-5xl md:leading-relaxed">
-                abcdefghijklm<br />
-                nopqrstuvwxyz<br />
-                0123456789<br />
-                ..,:;?!&amp;%#
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Row 5: two square images — packaging */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
