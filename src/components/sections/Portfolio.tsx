@@ -12,6 +12,7 @@ interface PortfolioProps {
 function Portfolio({ onProjectClick }: PortfolioProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const [playingTitles, setPlayingTitles] = useState<Set<string>>(new Set())
+  const [playHeading, setPlayHeading] = useState(false)
 
   useGSAP(
     () => {
@@ -35,6 +36,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
             trigger: heading,
             start: 'top 85%',
             toggleActions: 'play none none none',
+            onEnter: () => setPlayHeading(true),
           },
         })
       }
@@ -106,7 +108,12 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
       {/* PROJECTS heading */}
       <div className="px-6 pt-16 md:px-[60px] md:pt-24">
         <h2 className="projects-heading font-display text-[48px] font-bold leading-none text-accent md:text-[96px]">
-          PROJECTS
+          <ScrambleText
+            text="PROJECTS"
+            play={playHeading}
+            charDelay={100}
+            cycleSpeed={40}
+          />
         </h2>
       </div>
 
