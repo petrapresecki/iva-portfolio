@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { getLenis } from '@/lib/lenis'
 import type { Project } from '@/data/projects'
 import ApuroDetail from '@/components/projects/ApuroDetail'
 import RoolDetail from '@/components/projects/RoolDetail'
@@ -10,6 +9,7 @@ import BookletDetail from '@/components/projects/BookletDetail'
 interface ProjectDetailProps {
   project: Project
   onClose: () => void
+  isActive: boolean
 }
 
 const projectComponents: Record<string, React.ComponentType> = {
@@ -19,26 +19,26 @@ const projectComponents: Record<string, React.ComponentType> = {
   booklet: BookletDetail,
 }
 
-function ProjectDetail({ project, onClose }: ProjectDetailProps) {
-  // Scroll to top when opening a project
+function ProjectDetail({ project, onClose, isActive }: ProjectDetailProps) {
+  const overlayRef = useRef<HTMLDivElement>(null)
+
+  // Scroll overlay to top each time it becomes active
   useEffect(() => {
-    const lenis = getLenis()
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true })
-    } else {
-      window.scrollTo(0, 0)
+    if (isActive && overlayRef.current) {
+      overlayRef.current.scrollTop = 0
     }
-  }, [project.id])
+  }, [isActive])
 
   const Content = projectComponents[project.id]
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="min-h-screen bg-black"
+      ref={overlayRef}
+      data-lenis-prevent
+      className={`fixed inset-0 z-30 overflow-y-auto bg-black ${!isActive ? 'hidden' : ''}`}
+      initial={{ y: '100vh' }}
+      animate={{ y: 0 }}
+      transition={{ type: 'tween', duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
     >
       {/* Floating back arrow — pinned to left edge */}
       <button

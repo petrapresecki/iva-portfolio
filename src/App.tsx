@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { initLenis, destroyLenis } from '@/lib/lenis'
+import { initLenis, destroyLenis, getLenis } from '@/lib/lenis'
 import Header from '@/components/layout/Header'
 import Portfolio from '@/components/sections/Portfolio'
 import ProjectDetail from '@/components/sections/ProjectDetail'
 import About from '@/components/sections/About'
 import CustomCursor from '@/components/ui/CustomCursor'
+import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 
 type Tab = 'portfolio' | 'about'
@@ -13,6 +14,7 @@ type Tab = 'portfolio' | 'about'
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('portfolio')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [openedProjects, setOpenedProjects] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     initLenis()
@@ -21,9 +23,21 @@ function App() {
     }
   }, [])
 
+  // Stop Lenis (body scroll) when a project overlay is active
+  useEffect(() => {
+    const lenis = getLenis()
+    if (!lenis) return
+    if (selectedProject) {
+      lenis.stop()
+    } else {
+      lenis.start()
+    }
+  }, [selectedProject])
+
   // Push history state when opening a project, pop on browser back
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project)
+    setOpenedProjects(prev => new Set(prev).add(project.id))
     window.history.pushState({ project: project.id }, '')
   }
 
@@ -49,6 +63,14 @@ function App() {
       window.history.back()
     }
     setSelectedProject(null)
+
+    if (tab === 'portfolio' && activeTab === 'portfolio') {
+      // Already on portfolio — scroll to projects section
+      const lenis = getLenis()
+      lenis?.scrollTo('#projects', { duration: 1.2 })
+      return
+    }
+
     setActiveTab(tab)
   }
 
@@ -56,21 +78,9 @@ function App() {
     <div className="grain">
       <CustomCursor />
       <div className="min-h-screen bg-black">
+        {/* Main content (portfolio / about) */}
         <AnimatePresence mode="wait">
-          {selectedProject ? (
-            <motion.main
-              key={`project-${selectedProject.id}`}
-              initial={{ y: '100vh' }}
-              animate={{ y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ type: 'tween', duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-            >
-              <ProjectDetail
-                project={selectedProject}
-                onClose={handleProjectClose}
-              />
-            </motion.main>
-          ) : activeTab === 'portfolio' ? (
+          {activeTab === 'portfolio' ? (
             <motion.main
               key="portfolio"
               initial={{ opacity: 0 }}
@@ -95,6 +105,19 @@ function App() {
             </motion.main>
           )}
         </AnimatePresence>
+
+        {/* Project detail overlays — persist once opened */}
+        {projects.map(project => {
+          if (!openedProjects.has(project.id)) return null
+          return (
+            <ProjectDetail
+              key={project.id}
+              project={project}
+              isActive={selectedProject?.id === project.id}
+              onClose={handleProjectClose}
+            />
+          )
+        })}
       </div>
     </div>
   )

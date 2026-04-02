@@ -106,7 +106,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
       </div>
 
       {/* PROJECTS heading */}
-      <div className="px-6 pt-16 md:px-[60px] md:pt-24">
+      <div id="projects" className="px-6 pt-16 md:px-[60px] md:pt-24">
         <h2 className="projects-heading font-display text-[48px] font-bold leading-none text-accent md:text-[96px]">
           <ScrambleText
             text="PROJECTS"
