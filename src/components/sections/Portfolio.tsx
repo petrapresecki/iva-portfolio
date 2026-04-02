@@ -126,12 +126,11 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
               </div>
 
               {/* Title row — clickable, highlight on hover */}
-              <div className="px-6 md:px-[60px]">
               <div
-                className="group relative cursor-pointer overflow-hidden px-4 py-3 md:px-[18px] md:py-4 project-link before:absolute before:inset-0 before:translate-y-full before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-y-0"
+                className="group relative cursor-pointer overflow-hidden px-6 py-3 md:px-[60px] md:py-4 project-link before:absolute before:top-0 before:bottom-0 before:left-6 before:right-6 md:before:left-[60px] md:before:right-[60px] before:translate-y-full before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-y-0"
                 onClick={() => onProjectClick(project)}
               >
-                <h3 className="project-title relative z-10 font-display text-[40px] font-bold leading-tight text-accent transition-colors duration-200 group-hover:text-black md:text-[64px]">
+                <h3 className="project-title relative z-10 font-display text-[40px] font-bold leading-tight text-accent transition-all duration-200 group-hover:ml-[18px] group-hover:text-black md:text-[64px]">
                   <ScrambleText
                     text={project.title}
                     play={playingTitles.has(project.id)}
@@ -139,7 +138,6 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
                     cycleSpeed={40}
                   />
                 </h3>
-              </div>
               </div>
 
               {/* Sub line */}
