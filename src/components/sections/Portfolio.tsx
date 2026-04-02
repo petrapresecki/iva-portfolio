@@ -204,14 +204,21 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
         })}
       </div>
 
-      {/* E-MAIL button */}
-      <div className="flex justify-end px-6 pb-16 md:px-[60px] md:pb-20">
-        <a
-          href="mailto:presecki.iva@gmail.com"
-          className="inline-block rounded-full border border-accent px-7 py-2 font-display text-[16px] font-bold tracking-[0.8px] text-accent transition-colors duration-200 hover:bg-accent hover:text-black md:text-[20px]"
-        >
-          E-MAIL
-        </a>
+      {/* Contact */}
+      <div className="px-6 pb-16 pt-8 md:px-[60px] md:pb-20 md:pt-12">
+        <div className="h-[3px] bg-accent" />
+        <div className="flex items-baseline justify-between py-4 md:py-6">
+          <p className="font-display text-[18px] font-light text-accent md:text-[24px]">
+            Contact
+          </p>
+          <a
+            href="mailto:presecki.iva@gmail.com"
+            className="font-display text-[18px] font-light text-accent transition-opacity hover:opacity-70 md:text-[24px]"
+          >
+            presecki.iva@gmail.com
+          </a>
+        </div>
+        <div className="h-[3px] bg-accent" />
       </div>
     </section>
   )
