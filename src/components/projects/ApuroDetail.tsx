@@ -68,7 +68,7 @@ function ApuroDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <video
-            src="/videos/apuro/apuro-label-animation.mp4"
+            src="/videos/apuro/apuro.mp4"
             autoPlay
             loop
             muted
@@ -78,11 +78,13 @@ function ApuroDetail() {
         </div>
       </div>
 
-      {/* Info: description + tags + role */}
-      <div data-a="info" className="grid gap-8 px-6 pb-12 md:grid-cols-2 md:gap-16 md:px-16 md:pb-20">
+      {/* Info: description + tags */}
+      <div data-a="info" className="px-6 pb-12 md:px-16 md:pb-20">
+        <div className="mb-8 h-px bg-accent md:mb-10" />
+
         <p
           data-a="desc"
-          className="max-w-lg font-body text-sm leading-relaxed text-gray md:text-base"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
         >
           Apuro is a refreshing craft cider made from organically grown apples from the Zagorje region. Its natural origins and bold character are embodied in a 3D-modeled bottle that follows an organic, fluid shape.
           <br /><br />
@@ -91,60 +93,50 @@ function ApuroDetail() {
           The box, made from recycled cardboard, is 3D-modeled to follow the shape of the bottle, making it easy to carry and store. Animations were designed to visually express and reinforce the brand's natural and playful character.
         </p>
 
-        <div className="flex flex-col items-start gap-4 md:items-end">
-          <div className="flex flex-wrap gap-2">
-            {['Blender', 'Adobe Illustrator', 'Adobe After Effects'].map((tag) => (
-              <span
-                key={tag}
-                data-a="tag"
-                className="rounded-full border border-accent/40 px-4 py-1.5 font-display text-xs font-medium uppercase tracking-wider text-accent"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p
-            data-a="role"
-            className="font-display text-xs uppercase tracking-[0.15em] text-gray md:text-sm"
-          >
-            Branding, packaging, visual identity
-          </p>
+        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+          {['Blender', 'Adobe Illustrator', 'Adobe After Effects'].map((tag) => (
+            <span
+              key={tag}
+              data-a="tag"
+              className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
       {/* Gallery */}
       <div className="flex flex-col gap-4 px-6 pb-16 md:gap-6 md:px-16 md:pb-32">
-        {/* Row 1: two portrait images */}
+        {/* Row 1: two portrait — bottles hero + splash video */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
             data-gallery
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-bottle-detail.webp"
-              alt="Apuro bottle detail"
+              src="/images/apuro/apuro-bottles-hero.webp"
+              alt="Apuro bottles with apples"
               className="h-full w-full object-cover"
               loading="lazy"
             />
           </div>
           <div
             data-gallery
-            className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
+            className="aspect-[3/4] overflow-hidden rounded-xl md:rounded-2xl"
           >
-            <img
-              src="/images/apuro/apuro-bottles.jpg"
-              alt="Apuro bottles"
+            <LazyVideo
+              src="/videos/apuro/apuro-splash.mp4"
               className="h-full w-full object-cover"
-              loading="lazy"
             />
           </div>
         </div>
 
-        {/* Row 2: two videos */}
+        {/* Row 2: two square videos — colors + typography */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
             data-gallery
-            className="overflow-hidden rounded-xl md:rounded-2xl"
+            className="aspect-square overflow-hidden rounded-xl md:rounded-2xl"
           >
             <LazyVideo
               src="/videos/apuro/apuro-colors.mp4"
@@ -153,7 +145,7 @@ function ApuroDetail() {
           </div>
           <div
             data-gallery
-            className="overflow-hidden rounded-xl md:rounded-2xl"
+            className="aspect-square overflow-hidden rounded-xl md:rounded-2xl"
           >
             <LazyVideo
               src="/videos/apuro/apuro-typography.mp4"
@@ -162,28 +154,46 @@ function ApuroDetail() {
           </div>
         </div>
 
-        {/* Row 3: full width */}
+        {/* Row 3: full width — dark bottles */}
         <div
           data-gallery
           className="aspect-[16/9] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
         >
           <img
-            src="/images/apuro/apuro-showcase.webp"
-            alt="Apuro showcase"
+            src="/images/apuro/apuro-bottles-dark.jpg"
+            alt="Apuro bottles in dark"
             className="h-full w-full object-cover"
             loading="lazy"
           />
         </div>
 
-        {/* Row 4: two square images */}
+        {/* Row 4: font specimen */}
+        <div
+          data-gallery
+          className="overflow-hidden rounded-xl md:rounded-2xl"
+        >
+          <div className="flex items-center justify-center bg-accent px-8 py-16 md:py-24">
+            <div className="text-center font-body text-black">
+              <p className="mb-2 text-sm uppercase tracking-widest text-black/60">Gotoshi Regular</p>
+              <p className="text-3xl leading-relaxed md:text-5xl md:leading-relaxed">
+                abcdefghijklm<br />
+                nopqrstuvwxyz<br />
+                0123456789<br />
+                ..,:;?!&amp;%#
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 5: two square images — packaging */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
             data-gallery
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-packaging-1.jpg"
-              alt="Apuro packaging 1"
+              src="/images/apuro/apuro-packaging-boxes.jpg"
+              alt="Apuro packaging boxes"
               className="h-full w-full object-cover"
               loading="lazy"
             />
@@ -193,38 +203,34 @@ function ApuroDetail() {
             className="aspect-square overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-packaging-2.jpg"
-              alt="Apuro packaging 2"
+              src="/images/apuro/apuro-packaging-grass.jpg"
+              alt="Apuro packaging on grass"
               className="h-full w-full object-cover"
               loading="lazy"
             />
           </div>
         </div>
 
-        {/* Row 5: full width */}
+        {/* Row 6: full width video — packaging */}
         <div
           data-gallery
-          className="aspect-[16/9] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
+          className="overflow-hidden rounded-xl md:rounded-2xl"
         >
-          <img
-            src="/images/apuro/apuro-packaging-wide.jpg"
-            alt="Apuro packaging wide"
+          <LazyVideo
+            src="/videos/apuro/apuro-packaging.mp4"
             className="h-full w-full object-cover"
-            loading="lazy"
           />
         </div>
 
-        {/* Row 6: two portrait images */}
+        {/* Row 7: two portrait — papple video + bottle moody */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
             data-gallery
-            className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
+            className="aspect-[3/4] overflow-hidden rounded-xl md:rounded-2xl"
           >
-            <img
-              src="/images/apuro/apuro-closeup-1.jpg"
-              alt="Apuro closeup 1"
+            <LazyVideo
+              src="/videos/apuro/apuro-papple.mp4"
               className="h-full w-full object-cover"
-              loading="lazy"
             />
           </div>
           <div
@@ -232,8 +238,8 @@ function ApuroDetail() {
             className="aspect-[3/4] overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
           >
             <img
-              src="/images/apuro/apuro-closeup-2.webp"
-              alt="Apuro closeup 2"
+              src="/images/apuro/apuro-bottle-moody.jpg"
+              alt="Apuro bottle moody"
               className="h-full w-full object-cover"
               loading="lazy"
             />

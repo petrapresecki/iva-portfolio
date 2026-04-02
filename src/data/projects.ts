@@ -45,23 +45,20 @@ export const projects: Project[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     tags: ['cider', 'packaging', 'branding'],
     role: 'logo, branding, packaging',
-    heroImage: '/images/apuro/apuro-showcase.webp',
+    heroImage: '/images/apuro/apuro-bottles-hero.webp',
     gallery: [
       { type: 'images', items: [
-        { src: '/images/apuro/apuro-bottles.jpg', alt: 'Apuro bottles' },
-        { src: '/images/apuro/apuro-bottle-detail.webp', alt: 'Apuro bottle detail' },
-      ]},
-      { type: 'font-specimen', fontName: 'Gotoshi', fontStyle: 'Regular' },
-      { type: 'images', items: [
-        { src: '/images/apuro/apuro-packaging-wide.jpg', alt: 'Apuro packaging wide' },
+        { src: '/images/apuro/apuro-bottles-hero.webp', alt: 'Apuro bottles with apples' },
       ]},
       { type: 'images', items: [
-        { src: '/images/apuro/apuro-packaging-1.jpg', alt: 'Apuro packaging front' },
-        { src: '/images/apuro/apuro-packaging-2.jpg', alt: 'Apuro packaging back' },
+        { src: '/images/apuro/apuro-bottles-dark.jpg', alt: 'Apuro bottles in dark' },
       ]},
       { type: 'images', items: [
-        { src: '/images/apuro/apuro-closeup-1.jpg', alt: 'Apuro closeup' },
-        { src: '/images/apuro/apuro-closeup-2.webp', alt: 'Apuro closeup detail' },
+        { src: '/images/apuro/apuro-packaging-boxes.jpg', alt: 'Apuro packaging boxes' },
+        { src: '/images/apuro/apuro-packaging-grass.jpg', alt: 'Apuro packaging on grass' },
+      ]},
+      { type: 'images', items: [
+        { src: '/images/apuro/apuro-bottle-moody.jpg', alt: 'Apuro bottle moody' },
       ]},
     ],
   },

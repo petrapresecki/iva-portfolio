@@ -115,6 +115,7 @@ function App() {
               project={project}
               isActive={selectedProject?.id === project.id}
               onClose={handleProjectClose}
+              onNavigate={handleProjectClick}
             />
           )
         })}

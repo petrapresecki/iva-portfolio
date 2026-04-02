@@ -72,35 +72,29 @@ function BookletDetail() {
         </div>
       </div>
 
-      {/* Info: description + tags + role */}
-      <div data-a="info" className="grid gap-8 px-6 pb-12 md:grid-cols-2 md:gap-16 md:px-16 md:pb-20">
+      {/* Info: description + tags */}
+      <div data-a="info" className="px-6 pb-12 md:px-16 md:pb-20">
+        <div className="mb-8 h-px bg-accent md:mb-10" />
+
         <p
           data-a="desc"
-          className="max-w-lg font-body text-sm leading-relaxed text-gray md:text-base"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
         >
           The booklet is a 41-page exploration of upcycled fashion, reflecting its unpredictable, rule-breaking nature through a dynamic visual language. Each spread embraces a different aesthetic and expression, mirroring the way upcycled pieces combine diverse fabrics, patterns, materials, shapes, and textures.
           <br /><br />
           The design rejects repetitive consistency in favor of bold, unexpected compositions, just like the garments it celebrates. The tactile nature of the 3D modeled book enhances this experience: thick, embossed pages invite touch; sturdy metal rings provide weight and structure; and a fluid, curved plastic keychain reflects the textures of fabric, connecting the reader to the materials behind the work.
         </p>
 
-        <div className="flex flex-col items-start gap-4 md:items-end">
-          <div className="flex flex-wrap gap-2">
-            {['Blender', 'Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign'].map((tag) => (
-              <span
-                key={tag}
-                data-a="tag"
-                className="rounded-full border border-accent/40 px-4 py-1.5 font-display text-xs font-medium uppercase tracking-wider text-accent"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p
-            data-a="role"
-            className="font-display text-xs uppercase tracking-[0.15em] text-gray md:text-sm"
-          >
-            Editorial design, cover design
-          </p>
+        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+          {['Blender', 'Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign'].map((tag) => (
+            <span
+              key={tag}
+              data-a="tag"
+              className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 

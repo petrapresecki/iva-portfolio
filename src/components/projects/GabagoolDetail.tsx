@@ -69,35 +69,29 @@ function GabagoolDetail() {
         </div>
       </div>
 
-      {/* Info: description + tags + role */}
-      <div data-a="info" className="grid gap-8 px-6 pb-12 md:grid-cols-2 md:gap-16 md:px-16 md:pb-20">
+      {/* Info: description + tags */}
+      <div data-a="info" className="px-6 pb-12 md:px-16 md:pb-20">
+        <div className="mb-8 h-px bg-accent md:mb-10" />
+
         <p
           data-a="desc"
-          className="max-w-lg font-body text-sm leading-relaxed text-gray md:text-base"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
         >
           Gabagool is an Italian-style sandwich shop that transforms the culture of cured meats into a playful, vibrant visual identity. The branding centers on soft, interactive blob-like and round forms inspired by the organic shapes of sliced ham, brought to life through subtle, fluid animations.
           <br /><br />
           A bold palette of reds and pinks references the natural tones of Italian deli meats. The geometric logotype complements the rounded forms, keeping the look balanced and cohesive.
         </p>
 
-        <div className="flex flex-col items-start gap-4 md:items-end">
-          <div className="flex flex-wrap gap-2">
-            {['Adobe Illustrator', 'Adobe After Effects', 'Adobe Photoshop'].map((tag) => (
-              <span
-                key={tag}
-                data-a="tag"
-                className="rounded-full border border-accent/40 px-4 py-1.5 font-display text-xs font-medium uppercase tracking-wider text-accent"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p
-            data-a="role"
-            className="font-display text-xs uppercase tracking-[0.15em] text-gray md:text-sm"
-          >
-            Branding, visual identity
-          </p>
+        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+          {['Adobe Illustrator', 'Adobe After Effects', 'Adobe Photoshop'].map((tag) => (
+            <span
+              key={tag}
+              data-a="tag"
+              className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 

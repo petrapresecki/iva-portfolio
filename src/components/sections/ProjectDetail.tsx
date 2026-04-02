@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 import ApuroDetail from '@/components/projects/ApuroDetail'
 import RoolDetail from '@/components/projects/RoolDetail'
@@ -9,6 +10,7 @@ import BookletDetail from '@/components/projects/BookletDetail'
 interface ProjectDetailProps {
   project: Project
   onClose: () => void
+  onNavigate: (project: Project) => void
   isActive: boolean
 }
 
@@ -19,7 +21,7 @@ const projectComponents: Record<string, React.ComponentType> = {
   booklet: BookletDetail,
 }
 
-function ProjectDetail({ project, onClose, isActive }: ProjectDetailProps) {
+function ProjectDetail({ project, onClose, onNavigate, isActive }: ProjectDetailProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
 
   // Scroll overlay to top each time it becomes active
@@ -30,6 +32,10 @@ function ProjectDetail({ project, onClose, isActive }: ProjectDetailProps) {
   }, [isActive])
 
   const Content = projectComponents[project.id]
+
+  const currentIndex = projects.findIndex((p) => p.id === project.id)
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
 
   return (
     <motion.div
@@ -69,6 +75,30 @@ function ProjectDetail({ project, onClose, isActive }: ProjectDetailProps) {
           <p className="font-display text-xl text-gray">
             Project detail coming soon
           </p>
+        </div>
+      )}
+
+      {/* Previous / Next project navigation */}
+      {(prevProject || nextProject) && (
+        <div className="flex items-center justify-between px-6 pb-16 md:px-16 md:pb-20">
+          {prevProject ? (
+            <button
+              onClick={() => onNavigate(prevProject)}
+              className="flex h-[38px] items-center rounded-full border border-accent px-6 font-display text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-black md:text-xl"
+            >
+              previous project
+            </button>
+          ) : (
+            <span />
+          )}
+          {nextProject && (
+            <button
+              onClick={() => onNavigate(nextProject)}
+              className="flex h-[38px] items-center rounded-full border border-accent px-6 font-display text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-black md:text-xl"
+            >
+              next project
+            </button>
+          )}
         </div>
       )}
     </motion.div>
