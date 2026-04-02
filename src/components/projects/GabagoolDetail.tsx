@@ -1,30 +1,30 @@
-import { useRef, useState } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
-import ScrambleText from '@/components/ui/ScrambleText'
-import LazyVideo from '@/components/ui/LazyVideo'
+import { useRef, useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import ScrambleText from "@/components/ui/ScrambleText";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 function GabagoolDetail() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [titlePlay, setTitlePlay] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [titlePlay, setTitlePlay] = useState(false);
 
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (prefersReduced) {
-        setTitlePlay(true)
-        return
+        setTitlePlay(true);
+        return;
       }
 
-      const ctx = containerRef.current!
+      const ctx = containerRef.current!;
 
-      const hero = gsap.timeline({ delay: 0.25 })
-      hero.call(() => setTitlePlay(true))
+      const hero = gsap.timeline({ delay: 0.25 });
+      hero.call(() => setTitlePlay(true));
 
-      const star = ctx.querySelector('[data-a="star"]')
+      const star = ctx.querySelector('[data-a="star"]');
       if (star) {
-        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 })
+        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 });
         hero.to(
           star,
           {
@@ -32,16 +32,14 @@ function GabagoolDetail() {
             rotation: 0,
             opacity: 1,
             duration: 1,
-            ease: 'back.out(1.7)',
+            ease: "back.out(1.7)",
           },
           0.8,
-        )
+        );
       }
-
-
     },
     { scope: containerRef },
-  )
+  );
 
   return (
     <div ref={containerRef} className="overflow-hidden">
@@ -62,7 +60,7 @@ function GabagoolDetail() {
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
           <video
-            src="/videos/gabagool/gabagool-logo-animation.mp4"
+            src="/videos/gabagool.mp4"
             autoPlay
             loop
             muted
@@ -80,21 +78,29 @@ function GabagoolDetail() {
           data-a="desc"
           className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
         >
-          Gabagool is an Italian-style sandwich shop that transforms the culture of cured meats into a playful, vibrant visual identity. The branding centers on soft, interactive blob-like and round forms inspired by the organic shapes of sliced ham, brought to life through subtle, fluid animations.
-          <br /><br />
-          A bold palette of reds and pinks references the natural tones of Italian deli meats. The geometric logotype complements the rounded forms, keeping the look balanced and cohesive.
+          Gabagool is an Italian-style sandwich shop that transforms the culture
+          of cured meats into a playful, vibrant visual identity. The branding
+          centers on soft, interactive blob-like and round forms inspired by the
+          organic shapes of sliced ham, brought to life through subtle, fluid
+          animations.
+          <br />
+          <br />A bold palette of reds and pinks references the natural tones of
+          Italian deli meats. The geometric logotype complements the rounded
+          forms, keeping the look balanced and cohesive.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
-          {['Adobe Illustrator', 'Adobe After Effects', 'Adobe Photoshop'].map((tag) => (
-            <span
-              key={tag}
-              data-a="tag"
-              className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
-            >
-              {tag}
-            </span>
-          ))}
+          {["Adobe Illustrator", "Adobe After Effects", "Adobe Photoshop"].map(
+            (tag) => (
+              <span
+                key={tag}
+                data-a="tag"
+                className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
+              >
+                {tag}
+              </span>
+            ),
+          )}
         </div>
       </div>
 
@@ -228,7 +234,7 @@ function GabagoolDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default GabagoolDetail
+export default GabagoolDetail;
