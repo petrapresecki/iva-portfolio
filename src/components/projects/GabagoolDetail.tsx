@@ -56,14 +56,17 @@ function GabagoolDetail() {
           />
         </h1>
 
-        {/* Hero image */}
+        {/* Hero video */}
         <div
           data-a="hero-video"
           className="mt-8 overflow-hidden rounded-xl md:rounded-2xl"
         >
-          <img
-            src="/images/gabagool/gabagool-showcase.webp"
-            alt="Gabagool showcase"
+          <video
+            src="/videos/gabagool/gabagool-logo-animation.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="h-full w-full object-cover"
           />
         </div>
@@ -165,7 +168,20 @@ function GabagoolDetail() {
           </div>
         </div>
 
-        {/* Row 4: two portrait — video + image */}
+        {/* Row 4: full width showcase */}
+        <div
+          data-gallery
+          className="overflow-hidden rounded-xl bg-white/5 md:rounded-2xl"
+        >
+          <img
+            src="/images/gabagool/gabagool-showcase.webp"
+            alt="Gabagool showcase"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        {/* Row 5: two portrait — video + image */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           <div
             data-gallery
