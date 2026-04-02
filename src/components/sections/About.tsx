@@ -15,7 +15,7 @@ function About() {
       </div>
 
       {/* Bio text */}
-      <div className="mt-10 max-w-[871px] font-display text-[20px] font-semibold leading-[29px] tracking-[0.96px] md:text-[24px]">
+      <div className="mt-10 max-w-[871px] font-display text-[16px] font-semibold leading-[24px] tracking-[0.96px] md:text-[24px] md:leading-[29px]">
         <p>
           My name is Iva, I'm a 24 year old Faculty of Graphic Arts graduate.
           During my studies, I explored a range of digital media practices,

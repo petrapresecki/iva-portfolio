@@ -107,7 +107,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
 
       {/* PROJECTS heading */}
       <div id="projects" className="px-6 pt-16 md:px-[60px] md:pt-24">
-        <h2 className="projects-heading font-display text-[48px] font-bold leading-none text-accent md:text-[96px]">
+        <h2 className="projects-heading font-display text-[36px] font-bold leading-none text-accent md:text-[72px]">
           <ScrambleText
             text="PROJECTS"
             play={playHeading}
@@ -154,7 +154,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
 
               {/* Image + metadata area */}
               <div
-                className={`flex flex-col gap-6 px-6 py-8 md:px-[60px] md:py-12 ${
+                className={`flex flex-col gap-3 px-6 pb-4 md:gap-4 md:px-[60px] md:pb-8 ${
                   imageRight
                     ? 'md:items-end'
                     : 'md:items-start'

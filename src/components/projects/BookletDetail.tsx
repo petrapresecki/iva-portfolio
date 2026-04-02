@@ -47,7 +47,7 @@ function BookletDetail() {
     <div ref={containerRef} className="overflow-hidden">
       {/* Hero */}
       <div className="relative px-6 pb-12 pt-8 md:px-16 md:pb-20 md:pt-12">
-        <h1 className="font-display text-6xl font-bold text-white md:text-9xl">
+        <h1 className="font-display text-5xl font-bold text-white md:text-7xl">
           <ScrambleText
             text="Booklet"
             play={titlePlay}
