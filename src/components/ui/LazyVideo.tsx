@@ -15,6 +15,7 @@ function LazyVideo({ src, className }: LazyVideoProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          video.currentTime = 0
           video.play().catch(() => {})
         } else {
           video.pause()
