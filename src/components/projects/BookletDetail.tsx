@@ -1,30 +1,30 @@
-import { useRef, useState } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
-import ScrambleText from '@/components/ui/ScrambleText'
-import LazyVideo from '@/components/ui/LazyVideo'
+import { useRef, useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import ScrambleText from "@/components/ui/ScrambleText";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 function BookletDetail() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [titlePlay, setTitlePlay] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [titlePlay, setTitlePlay] = useState(false);
 
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (prefersReduced) {
-        setTitlePlay(true)
-        return
+        setTitlePlay(true);
+        return;
       }
 
-      const ctx = containerRef.current!
+      const ctx = containerRef.current!;
 
-      const hero = gsap.timeline({ delay: 0.25 })
-      hero.call(() => setTitlePlay(true))
+      const hero = gsap.timeline({ delay: 0.25 });
+      hero.call(() => setTitlePlay(true));
 
-      const star = ctx.querySelector('[data-a="star"]')
+      const star = ctx.querySelector('[data-a="star"]');
       if (star) {
-        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 })
+        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 });
         hero.to(
           star,
           {
@@ -32,16 +32,14 @@ function BookletDetail() {
             rotation: 0,
             opacity: 1,
             duration: 1,
-            ease: 'back.out(1.7)',
+            ease: "back.out(1.7)",
           },
           0.8,
-        )
+        );
       }
-
-
     },
     { scope: containerRef },
-  )
+  );
 
   return (
     <div ref={containerRef} className="overflow-hidden">
@@ -78,15 +76,30 @@ function BookletDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
+          className="max-w-[850px] font-display text-base font-medium leading-6 text-white text-left md:text-2xl md:leading-9"
         >
-          The booklet is a 41-page exploration of upcycled fashion, reflecting its unpredictable, rule-breaking nature through a dynamic visual language. Each spread embraces a different aesthetic and expression, mirroring the way upcycled pieces combine diverse fabrics, patterns, materials, shapes, and textures.
-          <br /><br />
-          The design rejects repetitive consistency in favor of bold, unexpected compositions, just like the garments it celebrates. The tactile nature of the 3D modeled book enhances this experience: thick, embossed pages invite touch; sturdy metal rings provide weight and structure; and a fluid, curved plastic keychain reflects the textures of fabric, connecting the reader to the materials behind the work.
+          The booklet is a 41-page exploration of upcycled fashion, reflecting
+          its unpredictable, rule-breaking nature through a dynamic visual
+          language. Each spread embraces a different aesthetic and expression,
+          mirroring the way upcycled pieces combine diverse fabrics, patterns,
+          materials, shapes, and textures.
+          <br />
+          <br />
+          The design rejects repetitive consistency in favor of bold, unexpected
+          compositions, just like the garments it celebrates. The tactile nature
+          of the 3D modeled book enhances this experience: thick, embossed pages
+          invite touch; sturdy metal rings provide weight and structure; and a
+          fluid, curved plastic keychain reflects the textures of fabric,
+          connecting the reader to the materials behind the work.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
-          {['Blender', 'Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign'].map((tag) => (
+          {[
+            "Blender",
+            "Adobe Illustrator",
+            "Adobe Photoshop",
+            "Adobe InDesign",
+          ].map((tag) => (
             <span
               key={tag}
               data-a="tag"
@@ -281,7 +294,7 @@ function BookletDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default BookletDetail
+export default BookletDetail;

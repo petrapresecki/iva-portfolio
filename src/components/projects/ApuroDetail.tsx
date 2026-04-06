@@ -1,36 +1,36 @@
-import { useRef, useState } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
-import ScrambleText from '@/components/ui/ScrambleText'
-import LazyVideo from '@/components/ui/LazyVideo'
+import { useRef, useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import ScrambleText from "@/components/ui/ScrambleText";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 function ApuroDetail() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [titlePlay, setTitlePlay] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [titlePlay, setTitlePlay] = useState(false);
 
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (prefersReduced) {
-        setTitlePlay(true)
-        return
+        setTitlePlay(true);
+        return;
       }
 
-      const ctx = containerRef.current!
+      const ctx = containerRef.current!;
 
       // ────────────────────────────────────────
       // Hero entrance timeline
       // ────────────────────────────────────────
-      const hero = gsap.timeline({ delay: 0.25 })
+      const hero = gsap.timeline({ delay: 0.25 });
 
       // Title — trigger scramble at start
-      hero.call(() => setTitlePlay(true))
+      hero.call(() => setTitlePlay(true));
 
       // Green star — spin + bounce scale
-      const star = ctx.querySelector('[data-a="star"]')
+      const star = ctx.querySelector('[data-a="star"]');
       if (star) {
-        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 })
+        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 });
         hero.to(
           star,
           {
@@ -38,16 +38,14 @@ function ApuroDetail() {
             rotation: 0,
             opacity: 1,
             duration: 1,
-            ease: 'back.out(1.7)',
+            ease: "back.out(1.7)",
           },
           0.8,
-        )
+        );
       }
-
-
     },
     { scope: containerRef },
-  )
+  );
 
   return (
     <div ref={containerRef} className="overflow-hidden">
@@ -84,25 +82,37 @@ function ApuroDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
+          className="max-w-[850px] font-display text-base font-medium leading-6 text-white text-left md:text-2xl md:leading-9"
         >
-          Apuro is a refreshing craft cider made from organically grown apples from the Zagorje region. Its natural origins and bold character are embodied in a 3D-modeled bottle that follows an organic, fluid shape.
-          <br /><br />
-          The visual identity and branding highlight Apuro's regional roots. A hybrid creature illustration inspired by local animals; rooster, deer, and fox, paired with a dynamic logo, creates an expressive design that communicates its organic and contemporary qualities.
-          <br /><br />
-          The box, made from recycled cardboard, is 3D-modeled to follow the shape of the bottle, making it easy to carry and store. Animations were designed to visually express and reinforce the brand's natural and playful character.
+          Apuro is a refreshing craft cider made from organically grown apples
+          from the Zagorje region. Its natural origins and bold character are
+          embodied in a 3D-modeled bottle that follows an organic, fluid shape.
+          <br />
+          <br />
+          The visual identity and branding highlight Apuro's regional roots. A
+          hybrid creature illustration inspired by local animals; rooster, deer,
+          and fox, paired with a dynamic logo, creates an expressive design that
+          communicates its organic and contemporary qualities.
+          <br />
+          <br />
+          The box, made from recycled cardboard, is 3D-modeled to follow the
+          shape of the bottle, making it easy to carry and store. Animations
+          were designed to visually express and reinforce the brand's natural
+          and playful character.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
-          {['Blender', 'Adobe Illustrator', 'Adobe After Effects'].map((tag) => (
-            <span
-              key={tag}
-              data-a="tag"
-              className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
-            >
-              {tag}
-            </span>
-          ))}
+          {["Blender", "Adobe Illustrator", "Adobe After Effects"].map(
+            (tag) => (
+              <span
+                key={tag}
+                data-a="tag"
+                className="flex h-[38px] items-center rounded-full border border-accent px-5 font-display text-[15px] font-medium text-accent"
+              >
+                {tag}
+              </span>
+            ),
+          )}
         </div>
       </div>
 
@@ -194,10 +204,7 @@ function ApuroDetail() {
         </div>
 
         {/* Row 6: full width video — packaging */}
-        <div
-          data-gallery
-          className="overflow-hidden rounded-xl md:rounded-2xl"
-        >
+        <div data-gallery className="overflow-hidden rounded-xl md:rounded-2xl">
           <LazyVideo
             src="/videos/apuro/apuro-packaging.mp4"
             className="h-full w-full object-cover"
@@ -229,7 +236,7 @@ function ApuroDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ApuroDetail
+export default ApuroDetail;

@@ -1,31 +1,31 @@
-import { useRef, useState } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
-import ScrambleText from '@/components/ui/ScrambleText'
-import LazyVideo from '@/components/ui/LazyVideo'
+import { useRef, useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import ScrambleText from "@/components/ui/ScrambleText";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 function RoolDetail() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [titlePlay, setTitlePlay] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [titlePlay, setTitlePlay] = useState(false);
 
   useGSAP(
     () => {
       const prefersReduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       if (prefersReduced) {
-        setTitlePlay(true)
-        return
+        setTitlePlay(true);
+        return;
       }
 
-      const ctx = containerRef.current!
+      const ctx = containerRef.current!;
 
       // Hero entrance timeline
-      const hero = gsap.timeline({ delay: 0.25 })
-      hero.call(() => setTitlePlay(true))
+      const hero = gsap.timeline({ delay: 0.25 });
+      hero.call(() => setTitlePlay(true));
 
-      const star = ctx.querySelector('[data-a="star"]')
+      const star = ctx.querySelector('[data-a="star"]');
       if (star) {
-        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 })
+        gsap.set(star, { scale: 0, rotation: -180, opacity: 0 });
         hero.to(
           star,
           {
@@ -33,16 +33,14 @@ function RoolDetail() {
             rotation: 0,
             opacity: 1,
             duration: 1,
-            ease: 'back.out(1.7)',
+            ease: "back.out(1.7)",
           },
           0.8,
-        )
+        );
       }
-
-
     },
     { scope: containerRef },
-  )
+  );
 
   return (
     <div ref={containerRef} className="overflow-hidden">
@@ -79,15 +77,28 @@ function RoolDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
+          className="max-w-[850px] font-display text-base font-medium leading-6 text-white text-left md:text-2xl md:leading-9"
         >
-          Rool is an event agency for electronic music, embodying the kinetic energy and pulsating rhythm of the scene through a bold, experimental visual language. Its logo, created with sharp edges and fluid contours, reflects the dynamic, unpredictable nature of sound, while the use of glow, metallic grays, dark reflective tones, and bright orange evoke club lights and laser shows.
-          <br /><br />
-          Dynamic animations translate rhythm into visual experience, and 3D-modeled metallic keychain and floating MP3 player reinforce the brand's connection to music culture.
+          Rool is an event agency for electronic music, embodying the kinetic
+          energy and pulsating rhythm of the scene through a bold, experimental
+          visual language. Its logo, created with sharp edges and fluid
+          contours, reflects the dynamic, unpredictable nature of sound, while
+          the use of glow, metallic grays, dark reflective tones, and bright
+          orange evoke club lights and laser shows.
+          <br />
+          <br />
+          Dynamic animations translate rhythm into visual experience, and
+          3D-modeled metallic keychain and floating MP3 player reinforce the
+          brand's connection to music culture.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
-          {['Blender', 'Adobe Illustrator', 'Adobe After Effects', 'Adobe Photoshop'].map((tag) => (
+          {[
+            "Blender",
+            "Adobe Illustrator",
+            "Adobe After Effects",
+            "Adobe Photoshop",
+          ].map((tag) => (
             <span
               key={tag}
               data-a="tag"
@@ -214,7 +225,7 @@ function RoolDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default RoolDetail
+export default RoolDetail;
