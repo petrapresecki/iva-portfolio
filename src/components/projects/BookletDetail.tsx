@@ -93,7 +93,7 @@ function BookletDetail() {
           connecting the reader to the materials behind the work.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+        <div className="mt-8 flex flex-col items-start gap-2 md:mt-10 md:flex-row md:flex-wrap">
           {[
             "Blender",
             "Adobe Illustrator",

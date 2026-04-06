@@ -92,7 +92,7 @@ function RoolDetail() {
           brand's connection to music culture.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+        <div className="mt-8 flex flex-col items-start gap-2 md:mt-10 md:flex-row md:flex-wrap">
           {[
             "Blender",
             "Adobe Illustrator",

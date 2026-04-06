@@ -101,7 +101,7 @@ function ApuroDetail() {
           and playful character.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2 md:mt-10">
+        <div className="mt-8 flex flex-col items-start gap-2 md:mt-10 md:flex-row md:flex-wrap">
           {["Blender", "Adobe Illustrator", "Adobe After Effects"].map(
             (tag) => (
               <span
