@@ -167,7 +167,11 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
                     imageRight ? 'md:ml-auto' : 'md:mr-auto'
                   }`}
                 >
-                  <div className="project-image overflow-hidden">
+                  <div
+                    role="button"
+                    className="project-image overflow-hidden"
+                    onClick={() => onProjectClick(project)}
+                  >
                     {project.video ? (
                       <LazyVideo
                         src={project.video}
