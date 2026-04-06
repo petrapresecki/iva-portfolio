@@ -94,17 +94,15 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
   return (
     <section ref={sectionRef} className="min-h-screen bg-black">
       {/* Hero video */}
-      <div className="px-6 md:px-[60px]">
-        <div className="overflow-hidden rounded-[15px]">
+      <div className="md:px-[60px]">
         <video
-          className="aspect-[16/9] w-full scale-[1.35] object-cover md:scale-100"
+          className="aspect-[16/9] w-full rounded-[15px] object-cover"
           src="/videos/hero.mp4"
           autoPlay
           loop
           muted
           playsInline
         />
-        </div>
       </div>
 
       {/* PROJECTS heading */}
