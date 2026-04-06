@@ -73,7 +73,7 @@ function Header({ activeTab, onTabChange, variant = 'dark' }: HeaderProps) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className={`!cursor-pointer font-display text-[14px] font-medium md:text-[20px] ${
+          className={`!cursor-pointer font-display text-[14px] font-medium md:text-[20px] mt-1.5 md:mt-2 ${
             isDark ? 'text-accent' : 'text-black'
           }`}
         >
