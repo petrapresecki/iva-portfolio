@@ -134,6 +134,7 @@ function Portfolio({ onProjectClick }: PortfolioProps) {
 
               {/* Title row — clickable, highlight on hover */}
               <div
+                role="button"
                 className="group relative cursor-pointer overflow-hidden px-6 py-3 md:px-[60px] md:py-4 project-link before:absolute before:top-0 before:bottom-0 before:left-6 before:right-6 md:before:left-[60px] md:before:right-[60px] before:translate-y-full before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-y-0"
                 onClick={() => onProjectClick(project)}
               >
