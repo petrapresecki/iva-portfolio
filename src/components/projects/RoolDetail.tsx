@@ -79,7 +79,7 @@ function RoolDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
         >
           Rool is an event agency for electronic music, embodying the kinetic energy and pulsating rhythm of the scene through a bold, experimental visual language. Its logo, created with sharp edges and fluid contours, reflects the dynamic, unpredictable nature of sound, while the use of glow, metallic grays, dark reflective tones, and bright orange evoke club lights and laser shows.
           <br /><br />

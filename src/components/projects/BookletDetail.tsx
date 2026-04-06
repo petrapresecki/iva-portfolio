@@ -78,7 +78,7 @@ function BookletDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
         >
           The booklet is a 41-page exploration of upcycled fashion, reflecting its unpredictable, rule-breaking nature through a dynamic visual language. Each spread embraces a different aesthetic and expression, mirroring the way upcycled pieces combine diverse fabrics, patterns, materials, shapes, and textures.
           <br /><br />

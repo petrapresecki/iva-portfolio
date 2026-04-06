@@ -76,7 +76,7 @@ function GabagoolDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
         >
           Gabagool is an Italian-style sandwich shop that transforms the culture
           of cured meats into a playful, vibrant visual identity. The branding

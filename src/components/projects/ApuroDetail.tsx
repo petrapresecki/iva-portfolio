@@ -84,7 +84,7 @@ function ApuroDetail() {
 
         <p
           data-a="desc"
-          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-justify md:text-2xl"
+          className="max-w-[850px] font-display text-lg font-medium leading-[29px] text-white text-left md:text-2xl"
         >
           Apuro is a refreshing craft cider made from organically grown apples from the Zagorje region. Its natural origins and bold character are embodied in a 3D-modeled bottle that follows an organic, fluid shape.
           <br /><br />
