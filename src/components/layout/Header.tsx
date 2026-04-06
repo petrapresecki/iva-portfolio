@@ -12,47 +12,29 @@ function NavPill({
   label,
   isActive,
   onClick,
-  isDark,
 }: {
   label: string
   isActive: boolean
   onClick: () => void
-  isDark: boolean
 }) {
   return (
     <button
       onClick={onClick}
-      className={`nav-pill group relative !cursor-pointer overflow-hidden rounded-full border px-5 py-1.5 font-display text-[14px] font-medium transition-all duration-300 md:px-7 md:py-2 md:text-[20px] ${
-        isDark
-          ? 'border-accent hover:shadow-[0_0_20px_rgba(5,255,67,0.35)]'
-          : 'border-black hover:shadow-[0_0_20px_rgba(0,0,0,0.2)]'
-      } ${
-        isActive
-          ? isDark
-            ? 'bg-accent text-black'
-            : 'bg-black text-accent'
-          : isDark
-            ? 'text-accent'
-            : 'text-black'
+      className={`nav-pill group relative !cursor-pointer overflow-hidden rounded-full border border-accent px-5 py-1.5 font-display text-[14px] font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(5,255,67,0.35)] md:px-7 md:py-2 md:text-[20px] ${
+        isActive ? 'bg-accent text-black' : 'text-accent'
       }`}
     >
       {/* Background fill — scales in on hover */}
       <span
-        className={`absolute inset-0 rounded-full transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          isDark ? 'bg-accent' : 'bg-black'
-        } ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+        className={`absolute inset-0 rounded-full bg-accent transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+        }`}
       />
 
       {/* Label */}
       <span
         className={`relative z-10 transition-colors duration-300 ${
-          isActive
-            ? isDark
-              ? 'text-black'
-              : 'text-accent'
-            : isDark
-              ? 'text-accent group-hover:text-black'
-              : 'text-black group-hover:text-accent'
+          isActive ? 'text-black' : 'text-accent group-hover:text-black'
         }`}
       >
         {label}
@@ -86,21 +68,17 @@ function Header({ activeTab, onTabChange, variant = 'dark' }: HeaderProps) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-        className={`fixed top-6 right-6 z-50 flex gap-3 md:top-[30px] md:right-[60px] ${
-          isDark ? 'mix-blend-difference' : ''
-        }`}
+        className="fixed top-6 right-6 z-50 flex gap-3 md:top-[30px] md:right-[60px] mix-blend-difference"
       >
         <NavPill
           label="PORTFOLIO"
           isActive={activeTab === 'portfolio'}
           onClick={() => onTabChange('portfolio')}
-          isDark={isDark}
         />
         <NavPill
           label="ABOUT"
           isActive={activeTab === 'about'}
           onClick={() => onTabChange('about')}
-          isDark={isDark}
         />
       </motion.nav>
     </>
