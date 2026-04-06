@@ -1,32 +1,32 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
 
 interface LazyVideoProps {
-  src: string
-  className?: string
+  src: string;
+  className?: string;
 }
 
 function LazyVideo({ src, className }: LazyVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
+    const video = videoRef.current;
+    if (!video) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.currentTime = 0
-          video.play().catch(() => {})
+          video.currentTime = 0;
+          video.play().catch(() => {});
         } else {
-          video.pause()
+          video.pause();
         }
       },
-      { rootMargin: '200px' },
-    )
+      { rootMargin: "200px" },
+    );
 
-    observer.observe(video)
-    return () => observer.disconnect()
-  }, [src])
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [src]);
 
   return (
     <video
@@ -35,10 +35,10 @@ function LazyVideo({ src, className }: LazyVideoProps) {
       loop
       muted
       playsInline
-      preload="none"
+      preload="metadata"
       className={className}
     />
-  )
+  );
 }
 
-export default LazyVideo
+export default LazyVideo;
