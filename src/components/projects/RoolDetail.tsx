@@ -46,7 +46,7 @@ function RoolDetail() {
     <div ref={containerRef} className="overflow-hidden">
       {/* Hero */}
       <div className="relative px-6 pb-12 pt-20 md:px-16 md:pb-20 md:pt-24">
-        <h1 className="font-display text-5xl font-bold text-white md:text-7xl">
+        <h1 className="font-display text-6xl font-bold text-white md:text-9xl">
           <ScrambleText
             text="Rool"
             play={titlePlay}
