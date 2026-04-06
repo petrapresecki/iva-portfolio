@@ -32,7 +32,9 @@ export default function CustomCursor() {
       })
 
       const target = e.target as HTMLElement
-      setHovering(!!target.closest('.project-link'))
+      setHovering(
+        !!target.closest('a, button, [role="button"], input, select, textarea, label, [tabindex]')
+      )
     }
 
     const onMouseLeave = () => {
