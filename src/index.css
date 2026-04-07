@@ -50,3 +50,9 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Fix iOS Safari overflow+border-radius clipping bug on media elements */
+[data-gallery],
+[data-a="hero-video"] {
+  transform: translateZ(0);
+}
+
